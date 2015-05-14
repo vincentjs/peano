@@ -1,4 +1,4 @@
-program main()
+program main
 
   write(6,*) " Starting peano testing framework..."
 

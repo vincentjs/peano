@@ -5,17 +5,18 @@ CFLAGS = -shared -O2
 WFLAGS = -Wall
 #WFLAGS = -Wall -Wextra -Wconversion -pedantic
 DFLAGS = -g -fbacktrace -fbounds-check -ffpe-trap=zero,overflow,underflow
-LDFLAGS = 
+LDFLAGS = -L${LIB}/peano.so
 SOURCES = $(patsubst %.f90, %.o, $(wildcard *.f90))
 EXECUTABLE = peano_tester.exe
 
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(SOURCES)
-	@$(FC) $(LDFLAGS) -o $@ $^
+	@$(FC) -o $@ $^ ./lib/cov.o
+	@mv *.o ./debug
 
 %.o: %.f90
-	@$(FC) -L $(CFLAGS) $(WFLAGS) $(DFLAGS) -lpeano -o $@ $< 
+	@$(FC) $(CFLAGS) $(WFLAGS) $(DFLAGS) -o $@ $< $(LDFLAGS) -fPIC
 
 clean:
-	rm -f *.o *.mod
+	@rm -f ./debug/*.o ./debug/*.mod

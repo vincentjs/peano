@@ -1,5 +1,9 @@
 module statistics
 
+  implicit none
+  
+  public :: mean, cov
+  
 contains
 
 pure real function mean(x) result(xbar)
