@@ -13,10 +13,10 @@ all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(SOURCES)
 	@$(FC) -o $@ $^ ./lib/cov.o
-	@mv *.o ./debug
+	@mv *.o $(EXECUTABLE) ./debug
 
 %.o: %.f90
 	@$(FC) $(CFLAGS) $(WFLAGS) $(DFLAGS) -o $@ $< $(LDFLAGS) -fPIC
 
 clean:
-	@rm -f ./debug/*.o ./debug/*.mod
+	@rm -f ./debug/*

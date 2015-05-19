@@ -53,8 +53,35 @@ pure real function median(x) result (xm)
   end if
   
 end function median
+
+pure real function variance(x) result(ss)
+  !! Returns the sample variance of the vector \(x\),
+  !! $$ s^2 = \frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right)^2
+
+  implicit none
+
+  real, allocatable, intent(in) :: x(:)
+
+  integer :: n
+  real :: xb
+
+  n = size(x)
+
+  xb = mean(x)
   
-pure real function cov(x, y) result(sigma)
+  if (allocated(x)) then
+     l = lbound(x,1)
+     u = ubound(x,1)
+     do i = l, u
+        ss = ss + (x(i) - xb)**2
+     end do
+
+     ss = 1 / (n - 1) * ss
+  end if
+  
+end function variance
+
+pure real function covariance(x, y) result(sigma)
   !! Returns the covariance of two vectors \(x\) and \(y\),
   !! $$ cov(x,y) =\frac{1,n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right) \left(B_i-\mu_y\right) $$
 
@@ -84,6 +111,6 @@ pure real function cov(x, y) result(sigma)
     end do
   end if
   
-end function cov
+end function covariance
 
 end module statistics
