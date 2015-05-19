@@ -6,9 +6,24 @@ module statistics
   
 contains
 
+pure real function factorial(x) result(xfac)
+  !! Returns the factorial of the scalar value \(x\),
+  !! $$ x! = n(n-1)(n-2)\cccdot(3)(2)(1) $$
+
+  real, intent(in) :: x
+
+  xfac = 1
+  if (x >= 0) then
+     do i = x, 1, -1
+        xfac = xfac * i
+     end do
+  end if
+
+end function factorial
+  
 pure real function mean(x) result(xbar)
   !! Returns the arithmatic mean of a vector.
-  !! $$ \mu = \frac{1,n} \Sum_{i=1}^n x_i
+  !! $$ \mu = \frac{1,n} \Sum_{i=1}^n x_i $$
 
   implicit none
 
@@ -56,7 +71,7 @@ end function median
 
 pure real function variance(x) result(ss)
   !! Returns the sample variance of the vector \(x\),
-  !! $$ s^2 = \frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right)^2
+  !! $$ s^2 = \frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right)^2 $$
 
   implicit none
 
@@ -81,9 +96,21 @@ pure real function variance(x) result(ss)
   
 end function variance
 
+pure real function standardDeviation(x) result(s)
+  !! Returns the sample standard deviation of a vector \(x\),
+  !! $$ s = \sqrt{\frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right)^2} $$
+
+  implicit none
+
+  real, allocatable, intent(in) :: x(:)
+
+  s = sqrt(variance(x))
+
+end function standardDeviation
+
 pure real function covariance(x, y) result(sigma)
   !! Returns the covariance of two vectors \(x\) and \(y\),
-  !! $$ cov(x,y) =\frac{1,n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right) \left(B_i-\mu_y\right) $$
+  !! $$ cov(x,y) =\frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right) \left(B_i-\mu_y\right) $$
 
   implicit none
   
