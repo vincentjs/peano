@@ -2,15 +2,17 @@ module statistics
 
   implicit none
   
-  public :: mean, cov
+  public :: factorial, mean, variance, standardDeviation, covariance
   
 contains
 
-pure real function factorial(x) result(xfac)
+pure integer function factorial(x) result(xfac)
   !! Returns the factorial of the scalar value \(x\),
   !! $$ x! = n(n-1)(n-2)\cccdot(3)(2)(1) $$
 
-  real, intent(in) :: x
+  integer, intent(in) :: x
+
+  integer :: i
 
   xfac = 1
   if (x >= 0) then
@@ -77,12 +79,13 @@ pure real function variance(x) result(ss)
 
   real, allocatable, intent(in) :: x(:)
 
-  integer :: n
+  integer :: n, i, l, u
   real :: xb
 
   n = size(x)
 
   xb = mean(x)
+  ss = 0.0
   
   if (allocated(x)) then
      l = lbound(x,1)
