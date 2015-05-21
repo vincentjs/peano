@@ -87,7 +87,8 @@ All Procedures &ndash; peano
 			   <tr><td><a href='../proc/covariance.html'>covariance</a></td><td><a href='../module/statistics.html'>statistics</a></td><td>Function</td><td><p>Returns the covariance of two vectors \(x\) and \(y\),
  $$ \sigma(x,y) =\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right) \left(y_i-\mu_y\right) $$</p></td></tr>
 			 
-			   <tr><td><a href='../proc/distance.html'>distance</a></td><td><a href='../module/geometry.html'>geometry</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/distance.html'>distance</a></td><td><a href='../module/geometry.html'>geometry</a></td><td>Function</td><td><p>Returns the Euclidean distance between two points \(\mathbf{x}\) and \(\mathbf{y}\), 
+ $$ \lVert \mathbf{q} - \mathbf{p} \rVert = \sqrt{\sum_{i=1}^n \left(q_i - p_i\right)^2} $$ </p></td></tr>
 			 
 			   <tr><td><a href='../proc/factorial.html'>factorial</a></td><td><a href='../module/statistics.html'>statistics</a></td><td>Function</td><td><p>Returns the factorial of the scalar value \(x\),
  $$ x! = n(n-1)(n-2)\cdots(3)(2)(1) $$</p></td></tr>
@@ -97,6 +98,9 @@ All Procedures &ndash; peano
 			 
 			   <tr><td><a href='../proc/median.html'>median</a></td><td><a href='../module/statistics.html'>statistics</a></td><td>Function</td><td><p>Returns the median of a vector. If the vector has an odd number
  of elements, the "mean of middle" two is returned.</p></td></tr>
+			 
+			   <tr><td><a href='../proc/norm.html'>norm</a></td><td><a href='../module/geometry.html'>geometry</a></td><td>Function</td><td><p>Returns the \(L_2\)-norm of a vector \(\mathbf{p}\),
+ $$ \lVert \mathbf{p} \rVert = \sqrt{\sum_{i=1}^n p_i} $$</p></td></tr>
 			 
 			   <tr><td><a href='../proc/standarddeviation.html'>standardDeviation</a></td><td><a href='../module/statistics.html'>statistics</a></td><td>Function</td><td><p>Returns the sample standard deviation of a vector \(x\),
  $$ s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2} $$</p></td></tr>

@@ -114,6 +114,20 @@
   
   
   
+  <div class="panel panel-primary">
+    <div class="panel-heading text-left"><h3 class="panel-title">Variables</h3></div>
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../proc/distance.html#var-l">l</a>
+      
+      <a class="list-group-item" href="../proc/distance.html#var-u">u</a>
+      
+      <a class="list-group-item" href="../proc/distance.html#var-n">n</a>
+      
+      <a class="list-group-item" href="../proc/distance.html#var-i">i</a>
+      
+    </div>
+  </div>
   
   
   
@@ -125,6 +139,8 @@
   
   
   
+  
+  <hr>
   
   <div class="panel panel-default">
     <div class="panel-heading text-left"><h3 class="panel-title">All Procedures</h3></div>
@@ -140,6 +156,8 @@
       
       <a class="list-group-item" href="../proc/median.html">median</a>
       
+      <a class="list-group-item" href="../proc/norm.html">norm</a>
+      
       <a class="list-group-item" href="../proc/standarddeviation.html">standardDeviation</a>
       
       <a class="list-group-item" href="../proc/variance.html">variance</a>
@@ -152,7 +170,7 @@
     
     <div class="col-lg-9" id='text'>
     <h2>
-public pure function distance(x0, y0, z0, x1, y1, z1)
+public pure function distance(p, q)
 </h2>
     
   
@@ -177,57 +195,12 @@ public pure function distance(x0, y0, z0, x1, y1, z1)
   
 <tr>
   
-  <td><a class="anchor" name="var-x0"></a>real,</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>x0</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-y0"></a>real,</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>y0</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-z0"></a>real,</td>
+  <td><a class="anchor" name="var-p"></a>real,</td>
   <td>intent(in),</td>
-  <td>optional</td>
-  
-  <td></td><td>::</td>
-  <td><strong>z0</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-x1"></a>real,</td>
-  <td>intent(in)</td>
   <td></td>
   
-  <td></td><td>::</td>
-  <td><strong>x1</strong></td><td></td>
+  <td>allocatable</td><td>::</td>
+  <td><strong>p</strong></td><td></td>
   
 </tr>
 
@@ -237,27 +210,12 @@ public pure function distance(x0, y0, z0, x1, y1, z1)
   
 <tr>
   
-  <td><a class="anchor" name="var-y1"></a>real,</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>y1</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-z1"></a>real,</td>
+  <td><a class="anchor" name="var-q"></a>real,</td>
   <td>intent(in),</td>
-  <td>optional</td>
+  <td></td>
   
-  <td></td><td>::</td>
-  <td><strong>z1</strong></td><td></td>
+  <td>allocatable</td><td>::</td>
+  <td><strong>q</strong></td><td></td>
   
 </tr>
 
@@ -276,6 +234,84 @@ public pure function distance(x0, y0, z0, x1, y1, z1)
     
     
     
+    <h3>Description</h3>
+    <p>Returns the Euclidean distance between two points \(\mathbf{x}\) and \(\mathbf{y}\), 
+ $$ \lVert \mathbf{q} - \mathbf{p} \rVert = \sqrt{\sum_{i=1}^n \left(q_i - p_i\right)^2} $$ </p>
+    
+    <br>
+    
+    <section>
+    <h2>Variables</h2>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th><th>Visibility</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-l"></a>integer,</td>
+  
+  <td>public</td>
+  <td></td><td>::</td>
+  <td><strong>l</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-u"></a>integer,</td>
+  
+  <td>public</td>
+  <td></td><td>::</td>
+  <td><strong>u</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-n"></a>integer,</td>
+  
+  <td>public</td>
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-i"></a>integer,</td>
+  
+  <td>public</td>
+  <td></td><td>::</td>
+  <td><strong>i</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+    </section>
     <br>
     
     

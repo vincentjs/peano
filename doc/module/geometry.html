@@ -123,6 +123,8 @@
     <div class="panel-heading text-left"><h3 class="panel-title">Functions</h3></div>
     <div class="list-group">
       
+      <a class="list-group-item" href="../module/geometry.html#proc-norm">norm</a>
+      
       <a class="list-group-item" href="../module/geometry.html#proc-distance">distance</a>
       
     </div>
@@ -171,8 +173,8 @@
     
     
   <div class="panel panel-default">
-  <div class="panel-heading codesum"><a class="anchor" name="proc-distance"></a><h3>
-public pure function <a href='../proc/distance.html'>distance</a>(x0, y0, z0, x1, y1, z1)
+  <div class="panel-heading codesum"><a class="anchor" name="proc-norm"></a><h3>
+public pure function <a href='../proc/norm.html'>norm</a>(p)
 </h3></div>
   <div class="panel-body">
        
@@ -196,59 +198,63 @@ public pure function <a href='../proc/distance.html'>distance</a>(x0, y0, z0, x1
   
 <tr>
   
-  <td><a class="anchor" name="var-x0"></a>real,</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>x0</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-y0"></a>real,</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>y0</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-z0"></a>real,</td>
+  <td><a class="anchor" name="var-p"></a>real,</td>
   <td>intent(in),</td>
-  <td>optional</td>
-  
-  <td></td><td>::</td>
-  <td><strong>z0</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-x1"></a>real,</td>
-  <td>intent(in)</td>
   <td></td>
   
-  <td></td><td>::</td>
-  <td><strong>x1</strong></td><td></td>
+  <td>allocatable</td><td>::</td>
+  <td><strong>p</strong></td><td></td>
   
 </tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small><a class="anchor" name="var-L2"></a>real
+  </small></h4>
+  
+    
+    
+    <h4>Description</h4>
+       
+
+
+       <p>Returns the \(L_2\)-norm of a vector \(\mathbf{p}\),
+ $$ \lVert \mathbf{p} \rVert = \sqrt{\sum_{i=1}^n p_i} $$</p>
+        
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><a class="anchor" name="proc-distance"></a><h3>
+public pure function <a href='../proc/distance.html'>distance</a>(p, q)
+</h3></div>
+  <div class="panel-body">
+       
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
 
   
   
@@ -256,27 +262,27 @@ public pure function <a href='../proc/distance.html'>distance</a>(x0, y0, z0, x1
   
 <tr>
   
-  <td><a class="anchor" name="var-y1"></a>real,</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>y1</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-z1"></a>real,</td>
+  <td><a class="anchor" name="var-p"></a>real,</td>
   <td>intent(in),</td>
-  <td>optional</td>
+  <td></td>
   
-  <td></td><td>::</td>
-  <td><strong>z1</strong></td><td></td>
+  <td>allocatable</td><td>::</td>
+  <td><strong>p</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-q"></a>real,</td>
+  <td>intent(in),</td>
+  <td></td>
+  
+  <td>allocatable</td><td>::</td>
+  <td><strong>q</strong></td><td></td>
   
 </tr>
 
@@ -295,6 +301,13 @@ public pure function <a href='../proc/distance.html'>distance</a>(x0, y0, z0, x1
   </small></h4>
   
     
+    
+    <h4>Description</h4>
+       
+
+
+       <p>Returns the Euclidean distance between two points \(\mathbf{x}\) and \(\mathbf{y}\), 
+ $$ \lVert \mathbf{q} - \mathbf{p} \rVert = \sqrt{\sum_{i=1}^n \left(q_i - p_i\right)^2} $$ </p>
         
 
   </div>
