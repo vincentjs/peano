@@ -1,5 +1,6 @@
 module geometry
-
+  !! Provides routines for basic geometrical and trigonometric functions in 2D and 3D.
+  
   implicit none
 
   public :: distance

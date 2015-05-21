@@ -1,5 +1,6 @@
 module statistics
-
+  !! Provides routines for basic statistical methods. 
+  
   implicit none
   
   public :: factorial, mean, variance, standardDeviation, covariance
@@ -8,7 +9,7 @@ contains
 
 pure integer function factorial(x) result(xfac)
   !! Returns the factorial of the scalar value \(x\),
-  !! $$ x! = n(n-1)(n-2)\cccdot(3)(2)(1) $$
+  !! $$ x! = n(n-1)(n-2)\cdots(3)(2)(1) $$
 
   integer, intent(in) :: x
 
@@ -25,7 +26,7 @@ end function factorial
   
 pure real function mean(x) result(xbar)
   !! Returns the arithmatic mean of a vector.
-  !! $$ \mu = \frac{1,n} \Sum_{i=1}^n x_i $$
+  !! $$ \mu = \frac{1}{n} \sum_{i=1}^n x_i $$
 
   implicit none
 
@@ -73,7 +74,7 @@ end function median
 
 pure real function variance(x) result(ss)
   !! Returns the sample variance of the vector \(x\),
-  !! $$ s^2 = \frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right)^2 $$
+  !! $$ s^2 = \frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2 $$
 
   implicit none
 
@@ -101,7 +102,7 @@ end function variance
 
 pure real function standardDeviation(x) result(s)
   !! Returns the sample standard deviation of a vector \(x\),
-  !! $$ s = \sqrt{\frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right)^2} $$
+  !! $$ s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2} $$
 
   implicit none
 
@@ -113,7 +114,7 @@ end function standardDeviation
 
 pure real function covariance(x, y) result(sigma)
   !! Returns the covariance of two vectors \(x\) and \(y\),
-  !! $$ cov(x,y) =\frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right) \left(B_i-\mu_y\right) $$
+  !! $$ \sigma(x,y) =\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right) \left(y_i-\mu_y\right) $$
 
   implicit none
   

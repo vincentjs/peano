@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	 
-	 <meta name="description" content="<p>A hodgepodge of mathematical routines written in modern Fortran. Provides functions for statistics, linear algebra, interpolation, search and sorts, root finding, fourier transforms, and differential equations. Some routines have been parallelized.</p>">
-    
+    <meta name="description" content="Documentation for peano">
+	 
     <meta name="author" content="Chris MacMackin" >
     <link rel="icon" href="../favicon.png">
 
@@ -242,7 +242,7 @@ public pure function covariance(x, y)
     
     <h3>Description</h3>
     <p>Returns the covariance of two vectors \(x\) and \(y\),
- $$ cov(x,y) =\frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right) \left(B_i-\mu_y\right) $$</p>
+ $$ \sigma(x,y) =\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right) \left(y_i-\mu_y\right) $$</p>
     
     <br>
     

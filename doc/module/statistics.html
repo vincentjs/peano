@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	 
-	 <meta name="description" content="<p>A hodgepodge of mathematical routines written in modern Fortran. Provides functions for statistics, linear algebra, interpolation, search and sorts, root finding, fourier transforms, and differential equations. Some routines have been parallelized.</p>">
-    
+    <meta name="description" content="Documentation for peano">
+	 
     <meta name="author" content="Chris MacMackin" >
     <link rel="icon" href="../favicon.png">
 
@@ -164,8 +164,8 @@
     
   
 
-    
-    
+    <p>Provides routines for basic statistical methods. </p>
+    <br>
 
     
     
@@ -236,7 +236,7 @@ public pure function <a href='../proc/factorial.html'>factorial</a>(x)
 
 
        <p>Returns the factorial of the scalar value \(x\),
- $$ x! = n(n-1)(n-2)\cccdot(3)(2)(1) $$</p>
+ $$ x! = n(n-1)(n-2)\cdots(3)(2)(1) $$</p>
         
 
   </div>
@@ -300,7 +300,7 @@ public pure function <a href='../proc/mean.html'>mean</a>(x)
 
 
        <p>Returns the arithmatic mean of a vector.
- $$ \mu = \frac{1,n} \Sum_{i=1}^n x_i $$</p>
+ $$ \mu = \frac{1}{n} \sum_{i=1}^n x_i $$</p>
         
 
   </div>
@@ -428,7 +428,7 @@ public pure function <a href='../proc/variance.html'>variance</a>(x)
 
 
        <p>Returns the sample variance of the vector \(x\),
- $$ s^2 = \frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right)^2 $$</p>
+ $$ s^2 = \frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2 $$</p>
         
 
   </div>
@@ -492,7 +492,7 @@ public pure function <a href='../proc/standarddeviation.html'>standardDeviation<
 
 
        <p>Returns the sample standard deviation of a vector \(x\),
- $$ s = \sqrt{\frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right)^2} $$</p>
+ $$ s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2} $$</p>
         
 
   </div>
@@ -571,7 +571,7 @@ public pure function <a href='../proc/covariance.html'>covariance</a>(x, y)
 
 
        <p>Returns the covariance of two vectors \(x\) and \(y\),
- $$ cov(x,y) =\frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right) \left(B_i-\mu_y\right) $$</p>
+ $$ \sigma(x,y) =\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right) \left(y_i-\mu_y\right) $$</p>
         
 
   </div>

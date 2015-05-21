@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	 
-	 <meta name="description" content="<p>A hodgepodge of mathematical routines written in modern Fortran. Provides functions for statistics, linear algebra, interpolation, search and sorts, root finding, fourier transforms, and differential equations. Some routines have been parallelized.</p>">
-    
+    <meta name="description" content="Documentation for peano">
+	 
     <meta name="author" content="Chris MacMackin" >
     <link rel="icon" href="../favicon.png">
 
@@ -150,7 +150,8 @@
     
     
     <div class="highlight"><pre><span class="k">module </span><span class="n">statistics</span>
-
+  <span class="c">!! Provides routines for basic statistical methods. </span>
+  
   <span class="k">implicit none</span>
 <span class="k">  </span>
 <span class="k">  public</span> <span class="kd">::</span> <span class="n">factorial</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">variance</span><span class="p">,</span> <span class="n">standardDeviation</span><span class="p">,</span> <span class="n">covariance</span>
@@ -159,7 +160,7 @@
 
 <span class="k">pure </span><span class="kt">integer </span><span class="k">function </span><span class="n">factorial</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">xfac</span><span class="p">)</span>
   <span class="c">!! Returns the factorial of the scalar value \(x\),</span>
-  <span class="c">!! $$ x! = n(n-1)(n-2)\cccdot(3)(2)(1) $$</span>
+  <span class="c">!! $$ x! = n(n-1)(n-2)\cdots(3)(2)(1) $$</span>
 
   <span class="kt">integer</span><span class="p">,</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span>
 
@@ -176,7 +177,7 @@
   
 <span class="k">pure </span><span class="kt">real </span><span class="k">function </span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">xbar</span><span class="p">)</span>
   <span class="c">!! Returns the arithmatic mean of a vector.</span>
-  <span class="c">!! $$ \mu = \frac{1,n} \Sum_{i=1}^n x_i $$</span>
+  <span class="c">!! $$ \mu = \frac{1}{n} \sum_{i=1}^n x_i $$</span>
 
   <span class="k">implicit none</span>
 
@@ -224,7 +225,7 @@
 
 <span class="k">pure </span><span class="kt">real </span><span class="k">function </span><span class="n">variance</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
   <span class="c">!! Returns the sample variance of the vector \(x\),</span>
-  <span class="c">!! $$ s^2 = \frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right)^2 $$</span>
+  <span class="c">!! $$ s^2 = \frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2 $$</span>
 
   <span class="k">implicit none</span>
 
@@ -252,7 +253,7 @@
 
 <span class="k">pure </span><span class="kt">real </span><span class="k">function </span><span class="n">standardDeviation</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
   <span class="c">!! Returns the sample standard deviation of a vector \(x\),</span>
-  <span class="c">!! $$ s = \sqrt{\frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right)^2} $$</span>
+  <span class="c">!! $$ s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2} $$</span>
 
   <span class="k">implicit none</span>
 
@@ -264,7 +265,7 @@
 
 <span class="k">pure </span><span class="kt">real </span><span class="k">function </span><span class="n">covariance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
   <span class="c">!! Returns the covariance of two vectors \(x\) and \(y\),</span>
-  <span class="c">!! $$ cov(x,y) =\frac{1}{n-1} \Sum_{i=1}^n \left(x_i - \mu_x \right) \left(B_i-\mu_y\right) $$</span>
+  <span class="c">!! $$ \sigma(x,y) =\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right) \left(y_i-\mu_y\right) $$</span>
 
   <span class="k">implicit none</span>
 <span class="k">  </span>
