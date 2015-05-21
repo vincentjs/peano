@@ -3,22 +3,50 @@ module geometry
   
   implicit none
 
-  public :: distance
+  public :: norm, distance
   
 contains
 
-  pure real function distance(x0, y0, z0, x1, y1, z1) result(d)
+  pure real function norm(p) result(d)
+    !! Returns the \(L_2\)-norm of a vector \(\mathbf{p}\),
+    !! $$ \lVert \mathbf{p} \rVert = \sqrt{\sum_{i=1}^n p_i} $$
 
     implicit none
 
-    real, intent(in) :: x0, x1, y0, y1
-    real, intent(in), optional :: z0, z1
+    real, allocatable, intent(in) :: p(:)
+    integer :: l, u, i
     
-    if (present(z0) .and. present(z1)) then
-       d = sqrt((x1-x0)**2 + (y1-y0)**2 + (z1-z0)**2)
-    else
-       d = sqrt((x1-x0)**2 + (y1-y0)**2)
-    end if
+    l = lbound(p,1)
+    u = ubound(p,1)
+
+    d = 0.0
+    do i = l, u
+       d = d + p(i)**2
+    end do
+
+    d = sqrt(d)
+
+  end function norm
+  
+  pure real function distance(p, q) result(d)
+    !! Returns the Euclidean distance between two points \(\mathbf{x}\) and \(\mathbf{y}\), 
+    !! $$ \lVert \mathbf{q} - \mathbf{p} \rVert = \sqrt{\sum_{i=1}^n \left(q_i - p_i\right)^2} $$ 
+    
+    implicit none
+
+    real, allocatable, intent(in) :: p(:), q(:)
+    integer :: l, u, i
+
+    !! @todo Check rank of p vs q
+    l = lbound(p,1)
+    u = ubound(p,1)
+
+    d = 0.0
+    do i = l, u
+       d = d + (q(i) - p(i))**2
+    end do
+
+    d = sqrt(d)
     
   end function distance
 end module geometry
