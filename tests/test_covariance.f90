@@ -1,4 +1,4 @@
-subroutine test_cov()
+subroutine test_covariance()
   !! Tests the covariance subroutine, cov.f90.
   use statistics
 
@@ -11,6 +11,6 @@ subroutine test_cov()
   allocate(c(6))
   a = (/0, 1, 2, 3, 4, 5/)
   b = (/0, 10, 20, 30, 40, 50/)
-  c = cov(a,b)
+  c = covariance(a,b)
   
-end subroutine test_cov
+end subroutine test_covariance
