@@ -1,21 +1,32 @@
-FC = /usr/bin/gfortran
-DIR = ./debug
-CFLAGS = -shared -O2
-WFLAGS = -Wall -Wextra -Wconversion -pedantic
-DFLAGS = -g -fbacktrace -fbounds-check -ffpe-trap=zero,overflow,underflow
-LDFLAGS = 
-SOURCES = $(patsubst %.f90, %.o, $(wildcard *.f90))
-LIBRARY = peano.so
+FC := gfortran
+AR := ar cr
+CFLAGS := -c -O2 -cpp
+WFLAGS := -Wall -Wextra -Wconversion -pedantic
+DFLAGS := -g -fbacktrace -fbounds-check -ffpe-trap=zero,overflow,underflow
+LDFLAGS := 
+SRCDIR := ./src/
+OBJDIR := ./include/
+BINDIR := ./bin/
+SOURCES = $(wildcard $(SRCDIR)*.f90)
+OBJECTS = $(addprefix $(OBJDIR), $(notdir $(SOURCES:.f90=.o)))
+OUTPUT := $(BINDIR)peano.a
 
-all: $(LIBRARY)
+all: $(OUTPUT)
 
-$(LIBRARY): $(SOURCES)
-	@$(FC) $(CFLAGS) $(WFLAGS) $(DFLAGS) $(SOURCES) -o $(LIBRARY) -fPIC
-	@mv *.mod *.o *.so ./debug
-	@cp ./debug/*.mod ./debug/*.so ./debug/*.o ../tests/lib
+$(OUTPUT): $(OBJECTS) 
+	$(AR) -o $@ $^ $(LDFLAGS)
 
-%.o: %.f90
-	@$(FC) $(CFLAGS) $(WFLAGS) $(DFLAGS) -o $@ $< -fPIC
+$(OBJECTS): $(OBJDIR)%.o: $(SRCDIR)%.f90
+	$(FC) -J$(OBJDIR) $(CFLAGS) $(WFLAGS) $(DFLAGS) $< -o $@
+
+$(OBJDIR)assert.o: $(OBJDIR)error.o
 
 clean:
-	@rm -f ./debug/*.mod ./debug/*.o
+	@rm -f *.mod *.o *~
+
+dist-clean: clean
+	@rm -f *.a
+
+install: $(OUTPUT) clean
+
+include .depend
