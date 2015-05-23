@@ -140,6 +140,10 @@
     <div class="panel-heading text-left"><h3 class="panel-title">All Modules</h3></div>
     <div class="list-group">
       
+      <a class="list-group-item" href="../module/assert.html">assert</a>
+      
+      <a class="list-group-item" href="../module/error.html">error</a>
+      
       <a class="list-group-item" href="../module/geometry.html">geometry</a>
       
       <a class="list-group-item" href="../module/kdtree.html">kdtree</a>
@@ -203,7 +207,7 @@ public pure function <a href='../proc/norm.html'>norm</a>(p)
   <td></td>
   
   <td>allocatable</td><td>::</td>
-  <td><strong>p</strong></td><td></td>
+  <td><strong>p</strong>(:)</td><td></td>
   
 </tr>
 
@@ -218,7 +222,7 @@ public pure function <a href='../proc/norm.html'>norm</a>(p)
   
   
   
-     <h4>Return Value <small><a class="anchor" name="var-L2"></a>real
+     <h4>Return Value <small><a class="anchor" name="var-d"></a>real
   </small></h4>
   
     
@@ -267,7 +271,7 @@ public pure function <a href='../proc/distance.html'>distance</a>(p, q)
   <td></td>
   
   <td>allocatable</td><td>::</td>
-  <td><strong>p</strong></td><td></td>
+  <td><strong>p</strong>(:)</td><td></td>
   
 </tr>
 
@@ -282,7 +286,7 @@ public pure function <a href='../proc/distance.html'>distance</a>(p, q)
   <td></td>
   
   <td>allocatable</td><td>::</td>
-  <td><strong>q</strong></td><td></td>
+  <td><strong>q</strong>(:)</td><td></td>
   
 </tr>
 

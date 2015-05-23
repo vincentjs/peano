@@ -135,6 +135,10 @@
     <div class="panel-heading text-left"><h3 class="panel-title">All Source Files</h3></div>
     <div class="list-group">
       
+      <a class="list-group-item" href="../sourcefile/assert.f90.html">assert.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/error.f90.html">error.f90</a>
+      
       <a class="list-group-item" href="../sourcefile/geometry.f90.html">geometry.f90</a>
       
       <a class="list-group-item" href="../sourcefile/kdtree.f90.html">kdtree.f90</a>
@@ -159,7 +163,7 @@
 <span class="k">contains</span>
 
 <span class="k">pure </span><span class="kt">integer </span><span class="k">function </span><span class="n">factorial</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">xfac</span><span class="p">)</span>
-  <span class="c">!! Returns the factorial of the scalar value \(x\),</span>
+  <span class="c">!! Returns the factorial of the scalar value \(\mathbf{x}\),</span>
   <span class="c">!! $$ x! = n(n-1)(n-2)\cdots(3)(2)(1) $$</span>
 
   <span class="kt">integer</span><span class="p">,</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span>
@@ -175,27 +179,30 @@
 
 <span class="k">end function </span><span class="n">factorial</span>
   
-<span class="k">pure </span><span class="kt">real </span><span class="k">function </span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">xbar</span><span class="p">)</span>
-  <span class="c">!! Returns the arithmatic mean of a vector.</span>
+<span class="k">pure </span><span class="kt">real </span><span class="k">function </span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+  <span class="c">!! Returns the arithmatic mean of a vector \(\mathbf{x}\).</span>
   <span class="c">!! $$ \mu = \frac{1}{n} \sum_{i=1}^n x_i $$</span>
 
   <span class="k">implicit none</span>
 
-<span class="k">  </span><span class="kt">real</span><span class="p">,</span> <span class="k">allocatable</span><span class="p">,</span>  <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">(:)</span>
+<span class="k">  </span><span class="kt">real</span><span class="p">,</span> <span class="k">allocatable</span><span class="p">,</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">(:)</span>
   
   <span class="kt">real</span> <span class="kd">::</span> <span class="n">Sx</span>
-  <span class="kt">integer</span> <span class="kd">::</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span>
+  <span class="kt">integer</span> <span class="kd">::</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span>
 
-  <span class="n">xbar</span> <span class="o">=</span> <span class="mf">0.0</span>
+  <span class="n">mu</span> <span class="o">=</span> <span class="mf">0.0</span>
   <span class="n">Sx</span> <span class="o">=</span> <span class="mf">0.0</span>
   
   <span class="k">if</span> <span class="p">(</span><span class="nb">allocated</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">then</span>
-<span class="k">    </span><span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span>
-      <span class="n">Sx</span> <span class="o">=</span> <span class="n">Sx</span> <span class="o">+</span> <span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    <span class="k">end do</span>
+<span class="k">     </span><span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+     <span class="n">l</span> <span class="o">=</span> <span class="nb">lbound</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+     <span class="n">u</span> <span class="o">=</span> <span class="nb">ubound</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+     
+     <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span>
+        <span class="n">Sx</span> <span class="o">=</span> <span class="n">Sx</span> <span class="o">+</span> <span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+     <span class="k">end do</span>
 
-<span class="k">    </span><span class="n">xbar</span> <span class="o">=</span> <span class="n">Sx</span> <span class="o">/</span> <span class="n">n</span>
+<span class="k">     </span><span class="n">mu</span> <span class="o">=</span> <span class="n">Sx</span> <span class="o">/</span> <span class="n">n</span>
   <span class="k">end if</span>
 <span class="k">end function </span><span class="n">mean</span>
 
@@ -224,7 +231,7 @@
 <span class="k">end function </span><span class="n">median</span>
 
 <span class="k">pure </span><span class="kt">real </span><span class="k">function </span><span class="n">variance</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
-  <span class="c">!! Returns the sample variance of the vector \(x\),</span>
+  <span class="c">!! Returns the sample variance of the vector \(\mathbf{x}\),</span>
   <span class="c">!! $$ s^2 = \frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2 $$</span>
 
   <span class="k">implicit none</span>
@@ -252,7 +259,7 @@
 <span class="k">end function </span><span class="n">variance</span>
 
 <span class="k">pure </span><span class="kt">real </span><span class="k">function </span><span class="n">standardDeviation</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-  <span class="c">!! Returns the sample standard deviation of a vector \(x\),</span>
+  <span class="c">!! Returns the sample standard deviation of a vector \(\mathbf{x}\),</span>
   <span class="c">!! $$ s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2} $$</span>
 
   <span class="k">implicit none</span>
@@ -264,7 +271,7 @@
 <span class="k">end function </span><span class="n">standardDeviation</span>
 
 <span class="k">pure </span><span class="kt">real </span><span class="k">function </span><span class="n">covariance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
-  <span class="c">!! Returns the covariance of two vectors \(x\) and \(y\),</span>
+  <span class="c">!! Returns the covariance of two vectors \(\mathbf{x}\) and \(\mathbf{y}\),</span>
   <span class="c">!! $$ \sigma(x,y) =\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right) \left(y_i-\mu_y\right) $$</span>
 
   <span class="k">implicit none</span>

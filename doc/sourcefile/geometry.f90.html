@@ -135,6 +135,10 @@
     <div class="panel-heading text-left"><h3 class="panel-title">All Source Files</h3></div>
     <div class="list-group">
       
+      <a class="list-group-item" href="../sourcefile/assert.f90.html">assert.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/error.f90.html">error.f90</a>
+      
       <a class="list-group-item" href="../sourcefile/geometry.f90.html">geometry.f90</a>
       
       <a class="list-group-item" href="../sourcefile/kdtree.f90.html">kdtree.f90</a>
@@ -154,21 +158,21 @@
   
   <span class="k">implicit none</span>
 
-<span class="k">  public</span> <span class="kd">::</span> <span class="n">distance</span>
+<span class="k">  public</span> <span class="kd">::</span> <span class="n">norm</span><span class="p">,</span> <span class="n">distance</span>
   
 <span class="k">contains</span>
 
-<span class="k">  pure </span><span class="kt">real </span><span class="k">function </span><span class="n">norm</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">L2</span><span class="p">)</span>
+<span class="k">  pure </span><span class="kt">real </span><span class="k">function </span><span class="n">norm</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
     <span class="c">!! Returns the \(L_2\)-norm of a vector \(\mathbf{p}\),</span>
     <span class="c">!! $$ \lVert \mathbf{p} \rVert = \sqrt{\sum_{i=1}^n p_i} $$</span>
 
     <span class="k">implicit none</span>
 
-<span class="k">    </span><span class="kt">real</span><span class="p">,</span> <span class="k">allocatable</span><span class="p">,</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">p</span>
-    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">,</span> <span class="k">allocatable</span><span class="p">,</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">p</span><span class="p">(:)</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">i</span>
     
-    <span class="n">l</span> <span class="o">=</span> <span class="nb">lbound</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="nb">ubound</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">lbound</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="nb">ubound</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="n">d</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span>
@@ -185,11 +189,12 @@
     
     <span class="k">implicit none</span>
 
-<span class="k">    </span><span class="kt">real</span><span class="p">,</span> <span class="k">allocatable</span><span class="p">,</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span>
-    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span>
-    
-    <span class="n">l</span> <span class="o">=</span> <span class="nb">lbound</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="nb">ubound</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">,</span> <span class="k">allocatable</span><span class="p">,</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">p</span><span class="p">(:),</span> <span class="n">q</span><span class="p">(:)</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">i</span>
+
+    <span class="c">!! @todo Check rank of p vs q</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">lbound</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="nb">ubound</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="n">d</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span>

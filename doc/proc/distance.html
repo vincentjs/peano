@@ -122,8 +122,6 @@
       
       <a class="list-group-item" href="../proc/distance.html#var-u">u</a>
       
-      <a class="list-group-item" href="../proc/distance.html#var-n">n</a>
-      
       <a class="list-group-item" href="../proc/distance.html#var-i">i</a>
       
     </div>
@@ -200,7 +198,7 @@ public pure function distance(p, q)
   <td></td>
   
   <td>allocatable</td><td>::</td>
-  <td><strong>p</strong></td><td></td>
+  <td><strong>p</strong>(:)</td><td></td>
   
 </tr>
 
@@ -215,7 +213,7 @@ public pure function distance(p, q)
   <td></td>
   
   <td>allocatable</td><td>::</td>
-  <td><strong>q</strong></td><td></td>
+  <td><strong>q</strong>(:)</td><td></td>
   
 </tr>
 
@@ -286,25 +284,11 @@ public pure function distance(p, q)
   
 <tr>
   
-  <td><a class="anchor" name="var-n"></a>integer,</td>
-  
-  <td>public</td>
-  <td></td><td>::</td>
-  <td><strong>n</strong></td><td></td><td></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
   <td><a class="anchor" name="var-i"></a>integer,</td>
   
   <td>public</td>
   <td></td><td>::</td>
-  <td><strong>i</strong></td><td></td><td></td><td></td>
+  <td><strong>i</strong></td><td></td><td></td><td><p><div class="alert alert-success" role="alert"><h4>ToDo</h4>Check rank of p vs q</div></p></td>
   
 </tr>
 

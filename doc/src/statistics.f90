@@ -8,7 +8,7 @@ module statistics
 contains
 
 pure integer function factorial(x) result(xfac)
-  !! Returns the factorial of the scalar value \(x\),
+  !! Returns the factorial of the scalar value \(\mathbf{x}\),
   !! $$ x! = n(n-1)(n-2)\cdots(3)(2)(1) $$
 
   integer, intent(in) :: x
@@ -24,27 +24,30 @@ pure integer function factorial(x) result(xfac)
 
 end function factorial
   
-pure real function mean(x) result(xbar)
-  !! Returns the arithmatic mean of a vector.
+pure real function mean(x) result(mu)
+  !! Returns the arithmatic mean of a vector \(\mathbf{x}\).
   !! $$ \mu = \frac{1}{n} \sum_{i=1}^n x_i $$
 
   implicit none
 
-  real, allocatable,  intent(in) :: x(:)
+  real, allocatable, intent(in) :: x(:)
   
   real :: Sx
-  integer :: n, i
+  integer :: n, i, l, u
 
-  xbar = 0.0
+  mu = 0.0
   Sx = 0.0
   
   if (allocated(x)) then
-    n = size(x)
-    do i = 1, n
-      Sx = Sx + x(i)
-    end do
+     n = size(x)
+     l = lbound(x,1)
+     u = ubound(x,1)
+     
+     do i = l, u
+        Sx = Sx + x(i)
+     end do
 
-    xbar = Sx / n
+     mu = Sx / n
   end if
 end function mean
 
@@ -73,7 +76,7 @@ pure real function median(x) result (xm)
 end function median
 
 pure real function variance(x) result(ss)
-  !! Returns the sample variance of the vector \(x\),
+  !! Returns the sample variance of the vector \(\mathbf{x}\),
   !! $$ s^2 = \frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2 $$
 
   implicit none
@@ -101,7 +104,7 @@ pure real function variance(x) result(ss)
 end function variance
 
 pure real function standardDeviation(x) result(s)
-  !! Returns the sample standard deviation of a vector \(x\),
+  !! Returns the sample standard deviation of a vector \(\mathbf{x}\),
   !! $$ s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2} $$
 
   implicit none
@@ -113,7 +116,7 @@ pure real function standardDeviation(x) result(s)
 end function standardDeviation
 
 pure real function covariance(x, y) result(sigma)
-  !! Returns the covariance of two vectors \(x\) and \(y\),
+  !! Returns the covariance of two vectors \(\mathbf{x}\) and \(\mathbf{y}\),
   !! $$ \sigma(x,y) =\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right) \left(y_i-\mu_y\right) $$
 
   implicit none

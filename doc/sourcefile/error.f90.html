@@ -10,7 +10,7 @@
     <meta name="author" content="Chris MacMackin" >
     <link rel="icon" href="../favicon.png">
 
-    <title>norm &ndash; peano</title>
+    <title>error.f90 &ndash; peano</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -77,8 +77,8 @@
     
   
   <div class="row">
-    <h1>norm
-    <small>Function</small>
+    <h1>error.f90
+    <small>Source File</small>
     
     </h1>
 	 
@@ -92,43 +92,34 @@
      
     
     
-    <li><i class="fa fa-code"></i><a href="../src/geometry.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/error.f90"> Source File</a></li>
      
   </ul>
   <ol class="breadcrumb in-well text-right">
   
-     <li><a href='../sourcefile/geometry.f90.html'>geometry.f90</a></li>
-  
-     <li><a href='../module/geometry.html'>geometry</a></li>
-  
-     <li class="active">norm</li>
+     <li class="active">error.f90</li>
   </ol>
   </div>
 </div>
     
   </div>
-  
   <div class="row">
     <div class="col-lg-3">
     
   
   
   
+  
+  
+  
   <div class="panel panel-primary">
-    <div class="panel-heading text-left"><h3 class="panel-title">Variables</h3></div>
+    <div class="panel-heading text-left"><h3 class="panel-title">Modules</h3></div>
     <div class="list-group">
       
-      <a class="list-group-item" href="../proc/norm.html#var-l">l</a>
-      
-      <a class="list-group-item" href="../proc/norm.html#var-u">u</a>
-      
-      <a class="list-group-item" href="../proc/norm.html#var-i">i</a>
+      <a class="list-group-item" href="../sourcefile/error.f90.html#mod-error">error</a>
       
     </div>
   </div>
-  
-  
-  
   
   
   
@@ -141,160 +132,69 @@
   <hr>
   
   <div class="panel panel-default">
-    <div class="panel-heading text-left"><h3 class="panel-title">All Procedures</h3></div>
+    <div class="panel-heading text-left"><h3 class="panel-title">All Source Files</h3></div>
     <div class="list-group">
       
-      <a class="list-group-item" href="../proc/covariance.html">covariance</a>
+      <a class="list-group-item" href="../sourcefile/assert.f90.html">assert.f90</a>
       
-      <a class="list-group-item" href="../proc/distance.html">distance</a>
+      <a class="list-group-item" href="../sourcefile/error.f90.html">error.f90</a>
       
-      <a class="list-group-item" href="../proc/factorial.html">factorial</a>
+      <a class="list-group-item" href="../sourcefile/geometry.f90.html">geometry.f90</a>
       
-      <a class="list-group-item" href="../proc/mean.html">mean</a>
+      <a class="list-group-item" href="../sourcefile/kdtree.f90.html">kdtree.f90</a>
       
-      <a class="list-group-item" href="../proc/median.html">median</a>
-      
-      <a class="list-group-item" href="../proc/norm.html">norm</a>
-      
-      <a class="list-group-item" href="../proc/standarddeviation.html">standardDeviation</a>
-      
-      <a class="list-group-item" href="../proc/variance.html">variance</a>
+      <a class="list-group-item" href="../sourcefile/statistics.f90.html">statistics.f90</a>
       
     </div>
   </div>
   
   
     </div>
-    
     <div class="col-lg-9" id='text'>
-    <h2>
-public pure function norm(p)
-</h2>
     
-  
+    
+    <div class="highlight"><pre><span class="k">module </span><span class="n">error</span>
+  <span class="c">!! Development tool used to add and print error messages, as well as handle logic flow in the event an error is thrown. </span>
 
+  <span class="k">implicit none</span>
 
+<span class="k">  private</span>
 
-    <h3>Arguments</h3>
-    
-      
-<table class="table table-striped varlist">
-<thead><tr><th>Type</th>
-<th>Intent</th><th>Optional</th>
-<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+<span class="k">  </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span> <span class="kd">::</span> <span class="n">error_list</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">)</span>
+  <span class="kt">integer</span> <span class="kd">::</span> <span class="n">err_i</span> <span class="o">=</span> <span class="mi">0</span>
+  
+<span class="k">contains</span>
 
+<span class="k">  subroutine </span><span class="n">add_error_message</span><span class="p">(</span><span class="n">err_s</span><span class="p">)</span>
 
+    <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">err_s</span>
 
-<tbody>
+    <span class="n">err_i</span> <span class="o">=</span> <span class="n">err_i</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">error_list</span><span class="p">(</span><span class="n">err_i</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;Error: &quot;</span> <span class="o">//</span> <span class="nb">trim</span><span class="p">(</span><span class="n">err_s</span><span class="p">)</span>
 
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-p"></a>real,</td>
-  <td>intent(in),</td>
-  <td></td>
-  
-  <td>allocatable</td><td>::</td>
-  <td><strong>p</strong>(:)</td><td></td>
-  
-</tr>
+  <span class="k">end subroutine </span><span class="n">add_error_message</span>
 
-</tbody>
-</table>
+  <span class="k">subroutine </span><span class="n">print_error_list_to_shell</span><span class="p">()</span>
 
-    
-    
-    
-    
-    
-    
-    
-	 <h3>Return Value <small><a class="anchor" name="var-d"></a>real
-    </small></h3>
-    
-    
-    
-    <h3>Description</h3>
-    <p>Returns the \(L_2\)-norm of a vector \(\mathbf{p}\),
- $$ \lVert \mathbf{p} \rVert = \sqrt{\sum_{i=1}^n p_i} $$</p>
-    
-    <br>
-    
-    <section>
-    <h2>Variables</h2>
-    
-<table class="table table-striped varlist">
-<thead><tr><th>Type</th><th>Visibility</th>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span>
 
-<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">lbound</span><span class="p">(</span><span class="n">error_list</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="nb">ubound</span><span class="p">(</span><span class="n">error_list</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
+    <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span>
+       <span class="k">write</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="n">error_list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">end do</span>
 
+<span class="k">  end subroutine </span><span class="n">print_error_list_to_shell</span>
 
-<tbody>
-
+  <span class="k">subroutine </span><span class="n">terminate_with_failure</span><span class="p">()</span>
+    <span class="n">error</span> <span class="k">stop </span><span class="mi">1</span>
+  <span class="k">end subroutine </span><span class="n">terminate_with_failure</span>
   
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-l"></a>integer,</td>
-  
-  <td>public</td>
-  <td></td><td>::</td>
-  <td><strong>l</strong></td><td></td><td></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-u"></a>integer,</td>
-  
-  <td>public</td>
-  <td></td><td>::</td>
-  <td><strong>u</strong></td><td></td><td></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-i"></a>integer,</td>
-  
-  <td>public</td>
-  <td></td><td>::</td>
-  <td><strong>i</strong></td><td></td><td></td><td></td>
-  
-</tr>
-
-</tbody>
-</table>
-
-    </section>
-    <br>
+<span class="k">end module </span><span class="n">error</span>
     
-    
-    
+</pre></div>
 
-    
-    
-    
-    
-    
-
-
-    
-    
     </div>
   </div>
 

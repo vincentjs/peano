@@ -3,21 +3,21 @@ module geometry
   
   implicit none
 
-  public :: distance
+  public :: norm, distance
   
 contains
 
-  pure real function norm(p) result(L2)
+  pure real function norm(p) result(d)
     !! Returns the \(L_2\)-norm of a vector \(\mathbf{p}\),
     !! $$ \lVert \mathbf{p} \rVert = \sqrt{\sum_{i=1}^n p_i} $$
 
     implicit none
 
-    real, allocatable, intent(in) :: p
-    integer :: l, u, n, i
+    real, allocatable, intent(in) :: p(:)
+    integer :: l, u, i
     
-    l = lbound(p)
-    u = ubound(p)
+    l = lbound(p,1)
+    u = ubound(p,1)
 
     d = 0.0
     do i = l, u
@@ -34,11 +34,12 @@ contains
     
     implicit none
 
-    real, allocatable, intent(in) :: p, q
-    integer :: l, u, n, i
-    
-    l = lbound(p)
-    u = ubound(p)
+    real, allocatable, intent(in) :: p(:), q(:)
+    integer :: l, u, i
+
+    !! @todo Check rank of p vs q
+    l = lbound(p,1)
+    u = ubound(p,1)
 
     d = 0.0
     do i = l, u

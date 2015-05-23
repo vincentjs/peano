@@ -148,6 +148,10 @@
     <div class="panel-heading text-left"><h3 class="panel-title">All Modules</h3></div>
     <div class="list-group">
       
+      <a class="list-group-item" href="../module/assert.html">assert</a>
+      
+      <a class="list-group-item" href="../module/error.html">error</a>
+      
       <a class="list-group-item" href="../module/geometry.html">geometry</a>
       
       <a class="list-group-item" href="../module/kdtree.html">kdtree</a>
@@ -235,7 +239,7 @@ public pure function <a href='../proc/factorial.html'>factorial</a>(x)
        
 
 
-       <p>Returns the factorial of the scalar value \(x\),
+       <p>Returns the factorial of the scalar value \(\mathbf{x}\),
  $$ x! = n(n-1)(n-2)\cdots(3)(2)(1) $$</p>
         
 
@@ -290,7 +294,7 @@ public pure function <a href='../proc/mean.html'>mean</a>(x)
   
   
   
-     <h4>Return Value <small><a class="anchor" name="var-xbar"></a>real
+     <h4>Return Value <small><a class="anchor" name="var-mu"></a>real
   </small></h4>
   
     
@@ -299,7 +303,7 @@ public pure function <a href='../proc/mean.html'>mean</a>(x)
        
 
 
-       <p>Returns the arithmatic mean of a vector.
+       <p>Returns the arithmatic mean of a vector \(\mathbf{x}\).
  $$ \mu = \frac{1}{n} \sum_{i=1}^n x_i $$</p>
         
 
@@ -427,7 +431,7 @@ public pure function <a href='../proc/variance.html'>variance</a>(x)
        
 
 
-       <p>Returns the sample variance of the vector \(x\),
+       <p>Returns the sample variance of the vector \(\mathbf{x}\),
  $$ s^2 = \frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2 $$</p>
         
 
@@ -491,7 +495,7 @@ public pure function <a href='../proc/standarddeviation.html'>standardDeviation<
        
 
 
-       <p>Returns the sample standard deviation of a vector \(x\),
+       <p>Returns the sample standard deviation of a vector \(\mathbf{x}\),
  $$ s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2} $$</p>
         
 
@@ -570,7 +574,7 @@ public pure function <a href='../proc/covariance.html'>covariance</a>(x, y)
        
 
 
-       <p>Returns the covariance of two vectors \(x\) and \(y\),
+       <p>Returns the covariance of two vectors \(\mathbf{x}\) and \(\mathbf{y}\),
  $$ \sigma(x,y) =\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right) \left(y_i-\mu_y\right) $$</p>
         
 
