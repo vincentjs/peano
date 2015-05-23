@@ -6,8 +6,11 @@ subroutine test_cov()
   real, allocatable :: b(:)
   real, allocatable :: c(:)
 
-  a(:) = (/0, 1, 2, 3, 4, 5/)
-  b(:) = (/0, 10, 20, 30, 40, 50/)
-  c(:) = cov(a,b)
+  allocate(a(6))
+  allocate(b(6))
+  allocate(c(6))
+  a = (/0, 1, 2, 3, 4, 5/)
+  b = (/0, 10, 20, 30, 40, 50/)
+  c = cov(a,b)
   
 end subroutine test_cov

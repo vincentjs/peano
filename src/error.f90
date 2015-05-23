@@ -5,16 +5,17 @@ module error
 
   private
 
-  character(len=:) :: error_list(1:100)
+  character(len=1024) :: error_list(1:100)
   integer :: err_i = 0
   
 contains
 
   subroutine add_error_message(err_s)
 
-    character(len=:), intent(in) :: err_s
+    character(len=*), intent(in) :: err_s
 
-    error_list(err_i) = "Error: " + err_s
+    err_i = err_i + 1
+    error_list(err_i) = "Error: " // trim(err_s)
 
   end subroutine add_error_message
 
@@ -22,8 +23,8 @@ contains
 
     integer :: i, l, u
 
-    l = lbound(error_list)
-    u = ubound(error_list)
+    l = lbound(error_list,1)
+    u = ubound(error_list,1)
 
     do i = l, u
        write(6,*) error_list(i)

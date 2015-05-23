@@ -14,7 +14,7 @@ contains
     real, allocatable, intent(in) :: x(:), y(:)
     logical :: isSameRank
 
-    character(len=:) :: err_s
+    character(len=256) :: err_s
 
     isSameRank = is_same_rank(x,y)
 
@@ -35,8 +35,9 @@ contains
        res = .true.
     else
        res = .false.
+    end if
     
-  end function assert_same_rank
+  end function is_same_rank
   
 
 end module assert
