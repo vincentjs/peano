@@ -10,7 +10,7 @@
     <meta name="author" content="Chris MacMackin" >
     <link rel="icon" href="../favicon.png">
 
-    <title>kdtree &ndash; peano</title>
+    <title>assert_x_is_ge_y_real &ndash; peano</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -59,6 +59,8 @@
             <li><a href="../lists/procedures.html">Procedures</a></li>
 				
 								
+            <li><a href="../lists/types.html">Derived Types</a></li>
+				
 				
           </ul>
         <form action="../search.html" class="navbar-form navbar-right" role="search">
@@ -77,8 +79,8 @@
     
   
   <div class="row">
-    <h1>kdtree 
-    <small>Module</small>
+    <h1>assert_x_is_ge_y_real
+    <small>Subroutine</small>
     
     </h1>
 	 
@@ -92,14 +94,16 @@
      
     
     
-    <li><i class="fa fa-code"></i><a href="../src/kdtree.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/assert.f90"> Source File</a></li>
      
   </ul>
   <ol class="breadcrumb in-well text-right">
   
-     <li><a href='../sourcefile/kdtree.f90.html'>kdtree.f90</a></li>
+     <li><a href='../sourcefile/assert.f90.html'>assert.f90</a></li>
   
-     <li class="active">kdtree</li>
+     <li><a href='../module/assert.html'>assert</a></li>
+  
+     <li class="active">assert_x_is_ge_y_real</li>
   </ol>
   </div>
 </div>
@@ -112,31 +116,67 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <div class="panel panel-default">
-    <div class="panel-heading text-left"><h3 class="panel-title">All Modules</h3></div>
+  <div class="panel panel-primary">
+    <div class="panel-heading text-left"><h3 class="panel-title">Variables</h3></div>
     <div class="list-group">
       
-      <a class="list-group-item" href="../module/assert.html">assert</a>
+      <a class="list-group-item" href="../proc/assert_x_is_ge_y_real.html#var-err_s">err_s</a>
       
-      <a class="list-group-item" href="../module/error.html">error</a>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <hr>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading text-left"><h3 class="panel-title">All Procedures</h3></div>
+    <div class="list-group">
       
-      <a class="list-group-item" href="../module/geometry.html">geometry</a>
+      <a class="list-group-item" href="../proc/assert_same_bounds.html">assert_same_bounds</a>
       
-      <a class="list-group-item" href="../module/kdtree.html">kdtree</a>
+      <a class="list-group-item" href="../proc/assert_same_rank.html">assert_same_rank</a>
       
-      <a class="list-group-item" href="../module/statistics.html">statistics</a>
+      <a class="list-group-item" href="../interface/assert_x_is_ge_y.html">assert_x_is_ge_y</a>
+      
+      <a class="list-group-item" href="../proc/assert_x_is_ge_y_int.html">assert_x_is_ge_y_int</a>
+      
+      <a class="list-group-item" href="../proc/assert_x_is_ge_y_real.html">assert_x_is_ge_y_real</a>
+      
+      <a class="list-group-item" href="../proc/assert_x_is_gt_y.html">assert_x_is_gt_y</a>
+      
+      <a class="list-group-item" href="../proc/build.html">build</a>
+      
+      <a class="list-group-item" href="../proc/build_kd_tree.html">build_Kd_Tree</a>
+      
+      <a class="list-group-item" href="../proc/covariance.html">covariance</a>
+      
+      <a class="list-group-item" href="../proc/distance.html">distance</a>
+      
+      <a class="list-group-item" href="../proc/factorial.html">factorial</a>
+      
+      <a class="list-group-item" href="../proc/insertion_sort.html">insertion_sort</a>
+      
+      <a class="list-group-item" href="../proc/mean.html">mean</a>
+      
+      <a class="list-group-item" href="../proc/median.html">median</a>
+      
+      <a class="list-group-item" href="../proc/norm.html">norm</a>
+      
+      <a class="list-group-item" href="../proc/selection_sort.html">selection_sort</a>
+      
+      <a class="list-group-item" href="../proc/standarddeviation.html">standardDeviation</a>
+      
+      <a class="list-group-item" href="../proc/variance.html">variance</a>
       
     </div>
   </div>
@@ -145,12 +185,98 @@
     </div>
     
     <div class="col-lg-9" id='text'>
+    <h2>
+public  subroutine assert_x_is_ge_y_real(x, y)
+</h2>
     
   
 
-    <p>Provides routines for a k-dimensional tree, a space-partitioning data structure used for organizing points in k-dimensional space. Note that nearest neightbor searches within k-d trees are not suitable for high dimensional space and will likely perform no better than an exhaustive search. As a general rule of thumb, \(N \gg 2^k\).</p>
-    <br>
 
+
+    <h3>Arguments</h3>
+    
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-x"></a>real,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>x</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-y"></a>real,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>y</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+    
+    
+    
+    <h3>Description</h3>
+    <p>[Real] Asserts that input argument /(x/) is greater than or equal to input argument /(y/)</p>
+    
+    <br>
+    
+    <section>
+    <h2>Variables</h2>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th><th>Visibility</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-err_s"></a>character(len=256),</td>
+  
+  <td>public</td>
+  <td></td><td>::</td>
+  <td><strong>err_s</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+    </section>
+    <br>
     
     
     

@@ -10,7 +10,7 @@
     <meta name="author" content="Chris MacMackin" >
     <link rel="icon" href="../favicon.png">
 
-    <title>geometry &ndash; peano</title>
+    <title>kd_tree &ndash; peano</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -79,7 +79,7 @@
     
   
   <div class="row">
-    <h1>geometry 
+    <h1>kd_tree 
     <small>Module</small>
     
     </h1>
@@ -94,14 +94,14 @@
      
     
     
-    <li><i class="fa fa-code"></i><a href="../src/geometry.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/kdtree.f90"> Source File</a></li>
      
   </ul>
   <ol class="breadcrumb in-well text-right">
   
-     <li><a href='../sourcefile/geometry.f90.html'>geometry.f90</a></li>
+     <li><a href='../sourcefile/kdtree.f90.html'>kdtree.f90</a></li>
   
-     <li class="active">geometry</li>
+     <li class="active">kd_tree</li>
   </ol>
   </div>
 </div>
@@ -120,14 +120,28 @@
   
   
   
+  <div class="panel panel-primary">
+    <div class="panel-heading text-left"><h3 class="panel-title">Derived Types</h3></div>
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/kd_tree.html#type-kdbox">kdbox</a>
+      
+      <a class="list-group-item" href="../module/kd_tree.html#type-kdnode">kdnode</a>
+      
+      <a class="list-group-item" href="../module/kd_tree.html#type-kdtree">kdtree</a>
+      
+    </div>
+  </div>
+  
+  
   
   <div class="panel panel-primary">
     <div class="panel-heading text-left"><h3 class="panel-title">Functions</h3></div>
     <div class="list-group">
       
-      <a class="list-group-item" href="../module/geometry.html#proc-norm">norm</a>
+      <a class="list-group-item" href="../module/kd_tree.html#proc-build_Kd_Tree">build_Kd_Tree</a>
       
-      <a class="list-group-item" href="../module/geometry.html#proc-distance">distance</a>
+      <a class="list-group-item" href="../module/kd_tree.html#proc-build">build</a>
       
     </div>
   </div>
@@ -163,8 +177,17 @@
     <div class="col-lg-9" id='text'>
     
   
+    <ul class="list-inline">
+      <li><h4>Uses:</h4></li>
+      
+      <li><a href='../module/statistics.html'>statistics</a></li>
+      
+      <li><a href='../module/assert.html'>assert</a></li>
+      
+    </ul>
+  
 
-    <p>Provides routines for basic geometrical and trigonometric functions in 2D and 3D.</p>
+    <p>Provides routines for a k-dimensional tree, a space-partitioning data structure used for organizing points in k-dimensional space. Note that nearest neightbor searches within k-d trees are not suitable for high dimensional space and will likely perform no better than an exhaustive search. As a general rule of thumb, \(N \gg 2^k\). For an introduction to k-d trees, see "An introductory tutorial on kd-trees" (Andrew Moore, 1991).</p>
     <br>
 
     
@@ -174,6 +197,188 @@
     
     
     
+	 <h2>Derived Types</h2>
+	 
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><a class="anchor" name="type-kdbox"></a><h3>type, public :: <a href='../type/kdbox.html'>kdbox</a>
+    
+  </h3></div>
+  <div class="panel-body">
+     
+     <h4>Components</h4>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th><th>Visibility</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-min"></a>real,</td>
+  
+  <td>public</td>
+  <td></td><td>::</td>
+  <td><strong>min</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-max"></a>real,</td>
+  
+  <td>public</td>
+  <td></td><td>::</td>
+  <td><strong>max</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+     
+     
+          
+     
+     
+     <h4>Description</h4>
+       
+
+
+       <p>Represents a hyperrectangle / box / n-orthotope)</p>
+     
+  </div>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><a class="anchor" name="type-kdnode"></a><h3>type, public :: <a href='../type/kdnode.html'>kdnode</a>
+    
+  </h3></div>
+  <div class="panel-body">
+     
+     
+          
+     
+     
+     <h4>Description</h4>
+       
+
+
+       <p>Represents a node in the kdtree</p>
+     
+  </div>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><a class="anchor" name="type-kdtree"></a><h3>type, public :: <a href='../type/kdtree.html'>kdtree</a>
+    
+  </h3></div>
+  <div class="panel-body">
+     
+     <h4>Components</h4>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th><th>Visibility</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-set"></a>real,</td>
+  
+  <td>public,</td>
+  <td>pointer</td><td>::</td>
+  <td><strong>set</strong>(:,:)</td><td>=> </td><td>null()</td><td><p>The input (sorted, row-major) data set associated with this kd tree</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-root"></a>type(<a href='../type/kdnode.html'>kdnode</a>),</td>
+  
+  <td>public,</td>
+  <td>pointer</td><td>::</td>
+  <td><strong>root</strong></td><td>=> </td><td>null()</td><td><p>The root node of the kd tree</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-dim"></a>integer,</td>
+  
+  <td>public</td>
+  <td></td><td>::</td>
+  <td><strong>dim</strong></td><td> =</td><td>0</td><td><p>The rank of the data set's domain</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-num"></a>integer,</td>
+  
+  <td>public</td>
+  <td></td><td>::</td>
+  <td><strong>num</strong></td><td> =</td><td>0</td><td><p>The rank of the data set's range</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+     
+     
+          
+     
+     
+     <h4>Description</h4>
+       
+
+
+       <p>Represents the kdtree itself</p>
+     
+  </div>
+</div>
+
+    
+    </section>
+	 <br>
+    
     
      
     <section>
@@ -181,8 +386,8 @@
     
     
   <div class="panel panel-default">
-  <div class="panel-heading codesum"><a class="anchor" name="proc-norm"></a><h3>
-public pure function <a href='../proc/norm.html'>norm</a>(p)
+  <div class="panel-heading codesum"><a class="anchor" name="proc-build_Kd_Tree"></a><h3>
+public  function <a href='../proc/build_kd_tree.html'>build_Kd_Tree</a>(S)
 </h3></div>
   <div class="panel-body">
        
@@ -206,12 +411,12 @@ public pure function <a href='../proc/norm.html'>norm</a>(p)
   
 <tr>
   
-  <td><a class="anchor" name="var-p"></a>real,</td>
-  <td>intent(in),</td>
+  <td><a class="anchor" name="var-S"></a>real,</td>
+  <td>intent(inout),</td>
   <td></td>
   
-  <td>allocatable</td><td>::</td>
-  <td><strong>p</strong>(:)</td><td></td>
+  <td>target</td><td>::</td>
+  <td><strong>S</strong>(:,:)</td><td></td>
   
 </tr>
 
@@ -226,8 +431,8 @@ public pure function <a href='../proc/norm.html'>norm</a>(p)
   
   
   
-     <h4>Return Value <small><a class="anchor" name="var-d"></a>real
-  </small></h4>
+     <h4>Return Value <small><a class="anchor" name="var-kdt"></a>type(<a href='../type/kdtree.html'>kdtree</a>),
+  pointer</small></h4>
   
     
     
@@ -235,8 +440,9 @@ public pure function <a href='../proc/norm.html'>norm</a>(p)
        
 
 
-       <p>Returns the \(L_2\)-norm of a vector \(\mathbf{p}\),
- $$ \lVert \mathbf{p} \rVert = \sqrt{\sum_{i=1}^n p_i} $$</p>
+       <p>UX to build a balanced k-d tree from a set of sorted data points, /(S/).
+ <div class="alert alert-warning" role="alert"><h4>Warning</h4>Note that /(S/) must be input as a <em>row-major</em> array, /(\texttt{S(1:dim, 1:num)}/),
+ NOT in Fortran's usual column-major notation.</div></p>
         
 
   </div>
@@ -245,8 +451,8 @@ public pure function <a href='../proc/norm.html'>norm</a>(p)
     
     
   <div class="panel panel-default">
-  <div class="panel-heading codesum"><a class="anchor" name="proc-distance"></a><h3>
-public pure function <a href='../proc/distance.html'>distance</a>(p, q)
+  <div class="panel-heading codesum"><a class="anchor" name="proc-build"></a><h3>
+public recursive function <a href='../proc/build.html'>build</a>(tree)
 </h3></div>
   <div class="panel-body">
        
@@ -270,27 +476,12 @@ public pure function <a href='../proc/distance.html'>distance</a>(p, q)
   
 <tr>
   
-  <td><a class="anchor" name="var-p"></a>real,</td>
-  <td>intent(in),</td>
+  <td><a class="anchor" name="var-tree"></a>type(<a href='../type/kdtree.html'>kdtree</a>),</td>
+  <td>intent(inout),</td>
   <td></td>
   
-  <td>allocatable</td><td>::</td>
-  <td><strong>p</strong>(:)</td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-q"></a>real,</td>
-  <td>intent(in),</td>
-  <td></td>
-  
-  <td>allocatable</td><td>::</td>
-  <td><strong>q</strong>(:)</td><td></td>
+  <td>pointer</td><td>::</td>
+  <td><strong>tree</strong></td><td></td>
   
 </tr>
 
@@ -305,17 +496,10 @@ public pure function <a href='../proc/distance.html'>distance</a>(p, q)
   
   
   
-     <h4>Return Value <small><a class="anchor" name="var-d"></a>real
-  </small></h4>
+     <h4>Return Value <small><a class="anchor" name="var-node"></a>type(<a href='../type/kdnode.html'>kdnode</a>),
+  pointer</small></h4>
   
     
-    
-    <h4>Description</h4>
-       
-
-
-       <p>Returns the Euclidean distance between two points \(\mathbf{x}\) and \(\mathbf{y}\), 
- $$ \lVert \mathbf{q} - \mathbf{p} \rVert = \sqrt{\sum_{i=1}^n \left(q_i - p_i\right)^2} $$ </p>
         
 
   </div>

@@ -10,7 +10,7 @@
     <meta name="author" content="Chris MacMackin" >
     <link rel="icon" href="../favicon.png">
 
-    <title>mean &ndash; peano</title>
+    <title>insertion_sort &ndash; peano</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -79,8 +79,8 @@
     
   
   <div class="row">
-    <h1>mean
-    <small>Function</small>
+    <h1>insertion_sort
+    <small>Subroutine</small>
     
     </h1>
 	 
@@ -94,16 +94,16 @@
      
     
     
-    <li><i class="fa fa-code"></i><a href="../src/statistics.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/sort.f90"> Source File</a></li>
      
   </ul>
   <ol class="breadcrumb in-well text-right">
   
-     <li><a href='../sourcefile/statistics.f90.html'>statistics.f90</a></li>
+     <li><a href='../sourcefile/sort.f90.html'>sort.f90</a></li>
   
-     <li><a href='../module/statistics.html'>statistics</a></li>
+     <li><a href='../module/sort.html'>sort</a></li>
   
-     <li class="active">mean</li>
+     <li class="active">insertion_sort</li>
   </ol>
   </div>
 </div>
@@ -120,15 +120,15 @@
     <div class="panel-heading text-left"><h3 class="panel-title">Variables</h3></div>
     <div class="list-group">
       
-      <a class="list-group-item" href="../proc/mean.html#var-Sx">Sx</a>
+      <a class="list-group-item" href="../proc/insertion_sort.html#var-tmp">tmp</a>
       
-      <a class="list-group-item" href="../proc/mean.html#var-n">n</a>
+      <a class="list-group-item" href="../proc/insertion_sort.html#var-l">l</a>
       
-      <a class="list-group-item" href="../proc/mean.html#var-i">i</a>
+      <a class="list-group-item" href="../proc/insertion_sort.html#var-u">u</a>
       
-      <a class="list-group-item" href="../proc/mean.html#var-l">l</a>
+      <a class="list-group-item" href="../proc/insertion_sort.html#var-i">i</a>
       
-      <a class="list-group-item" href="../proc/mean.html#var-u">u</a>
+      <a class="list-group-item" href="../proc/insertion_sort.html#var-j">j</a>
       
     </div>
   </div>
@@ -194,7 +194,7 @@
     
     <div class="col-lg-9" id='text'>
     <h2>
-public pure function mean(x)
+public pure subroutine insertion_sort(S)
 </h2>
     
   
@@ -219,12 +219,12 @@ public pure function mean(x)
   
 <tr>
   
-  <td><a class="anchor" name="var-x"></a>real,</td>
-  <td>intent(in),</td>
+  <td><a class="anchor" name="var-S"></a>real,</td>
+  <td>intent(inout)</td>
   <td></td>
   
-  <td>allocatable</td><td>::</td>
-  <td><strong>x</strong>(:)</td><td></td>
+  <td></td><td>::</td>
+  <td><strong>S</strong>(:)</td><td></td>
   
 </tr>
 
@@ -234,18 +234,8 @@ public pure function mean(x)
     
     
     
-    
-    
-    
-    
-	 <h3>Return Value <small><a class="anchor" name="var-mu"></a>real
-    </small></h3>
-    
-    
-    
     <h3>Description</h3>
-    <p>Returns the arithmatic mean of a vector \(\mathbf{x}\).
- $$ \mu = \frac{1}{n} \sum_{i=1}^n x_i $$</p>
+    <p>An unconditionally stable, adaptive sorting algorithm with low overhead and /(O\left(n^2)/) worst-case time. This algorithm is ideal when the data set is nearly sorted or when the data set's range is small.</p>
     
     <br>
     
@@ -267,39 +257,11 @@ public pure function mean(x)
   
 <tr>
   
-  <td><a class="anchor" name="var-Sx"></a>real,</td>
+  <td><a class="anchor" name="var-tmp"></a>real,</td>
   
   <td>public</td>
   <td></td><td>::</td>
-  <td><strong>Sx</strong></td><td></td><td></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-n"></a>integer,</td>
-  
-  <td>public</td>
-  <td></td><td>::</td>
-  <td><strong>n</strong></td><td></td><td></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-i"></a>integer,</td>
-  
-  <td>public</td>
-  <td></td><td>::</td>
-  <td><strong>i</strong></td><td></td><td></td><td></td>
+  <td><strong>tmp</strong></td><td></td><td></td><td></td>
   
 </tr>
 
@@ -328,6 +290,34 @@ public pure function mean(x)
   <td>public</td>
   <td></td><td>::</td>
   <td><strong>u</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-i"></a>integer,</td>
+  
+  <td>public</td>
+  <td></td><td>::</td>
+  <td><strong>i</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-j"></a>integer,</td>
+  
+  <td>public</td>
+  <td></td><td>::</td>
+  <td><strong>j</strong></td><td></td><td></td><td></td>
   
 </tr>
 

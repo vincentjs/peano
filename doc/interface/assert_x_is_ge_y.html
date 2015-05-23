@@ -10,7 +10,7 @@
     <meta name="author" content="Chris MacMackin" >
     <link rel="icon" href="../favicon.png">
 
-    <title>mean &ndash; peano</title>
+    <title>assert_x_is_ge_y &ndash; peano</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -79,8 +79,8 @@
     
   
   <div class="row">
-    <h1>mean
-    <small>Function</small>
+    <h1>assert_x_is_ge_y
+	 <small>Interface</small>
     
     </h1>
 	 
@@ -94,16 +94,16 @@
      
     
     
-    <li><i class="fa fa-code"></i><a href="../src/statistics.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/assert.f90"> Source File</a></li>
      
   </ul>
   <ol class="breadcrumb in-well text-right">
   
-     <li><a href='../sourcefile/statistics.f90.html'>statistics.f90</a></li>
+     <li><a href='../sourcefile/assert.f90.html'>assert.f90</a></li>
   
-     <li><a href='../module/statistics.html'>statistics</a></li>
+     <li><a href='../module/assert.html'>assert</a></li>
   
-     <li class="active">mean</li>
+     <li class="active">assert_x_is_ge_y</li>
   </ol>
   </div>
 </div>
@@ -116,33 +116,27 @@
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <div class="panel panel-primary">
-    <div class="panel-heading text-left"><h3 class="panel-title">Variables</h3></div>
+    <div class="panel-heading text-left"><h3 class="panel-title">Module Procedures</h3></div>
     <div class="list-group">
       
-      <a class="list-group-item" href="../proc/mean.html#var-Sx">Sx</a>
+      <a class="list-group-item" href="../interface/assert_x_is_ge_y.html#proc-assert_x_is_ge_y_real">assert_x_is_ge_y_real</a>
       
-      <a class="list-group-item" href="../proc/mean.html#var-n">n</a>
-      
-      <a class="list-group-item" href="../proc/mean.html#var-i">i</a>
-      
-      <a class="list-group-item" href="../proc/mean.html#var-l">l</a>
-      
-      <a class="list-group-item" href="../proc/mean.html#var-u">u</a>
+      <a class="list-group-item" href="../interface/assert_x_is_ge_y.html#proc-assert_x_is_ge_y_int">assert_x_is_ge_y_int</a>
       
     </div>
   </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   <hr>
   
@@ -193,16 +187,28 @@
     </div>
     
     <div class="col-lg-9" id='text'>
-    <h2>
-public pure function mean(x)
-</h2>
+    <h2>public interface assert_x_is_ge_y</h2>
+	 
     
-  
+	
+	
 
+	
 
-
-    <h3>Arguments</h3>
+	
+	 <h2>Module Procedures</h2>
+	 
     
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><a class="anchor" name="proc-assert_x_is_ge_y_real"></a><h3>
+public  subroutine <a href='../proc/assert_x_is_ge_y_real.html'>assert_x_is_ge_y_real</a>(x, y)
+</h3></div>
+  <div class="panel-body">
+       
+    
+    <h4>Arguments</h4>
+    
+      
       
 <table class="table table-striped varlist">
 <thead><tr><th>Type</th>
@@ -220,42 +226,63 @@ public pure function mean(x)
 <tr>
   
   <td><a class="anchor" name="var-x"></a>real,</td>
-  <td>intent(in),</td>
+  <td>intent(in)</td>
   <td></td>
   
-  <td>allocatable</td><td>::</td>
-  <td><strong>x</strong>(:)</td><td></td>
+  <td></td><td>::</td>
+  <td><strong>x</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><a class="anchor" name="var-y"></a>real,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>y</strong></td><td></td>
   
 </tr>
 
 </tbody>
 </table>
 
+      
     
     
     
-    
-    
-    
-    
-	 <h3>Return Value <small><a class="anchor" name="var-mu"></a>real
-    </small></h3>
-    
-    
-    
-    <h3>Description</h3>
-    <p>Returns the arithmatic mean of a vector \(\mathbf{x}\).
- $$ \mu = \frac{1}{n} \sum_{i=1}^n x_i $$</p>
-    
-    <br>
-    
-    <section>
-    <h2>Variables</h2>
-    
-<table class="table table-striped varlist">
-<thead><tr><th>Type</th><th>Visibility</th>
+    <h4>Description</h4>
+       
 
-<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+       <p>[Real] Asserts that input argument /(x/) is greater than or equal to input argument /(y/)</p>
+        
+
+  </div>
+  </div>
+
+ 	 
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><a class="anchor" name="proc-assert_x_is_ge_y_int"></a><h3>
+public  subroutine <a href='../proc/assert_x_is_ge_y_int.html'>assert_x_is_ge_y_int</a>(x, y)
+</h3></div>
+  <div class="panel-body">
+       
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
 
 
 
@@ -267,11 +294,12 @@ public pure function mean(x)
   
 <tr>
   
-  <td><a class="anchor" name="var-Sx"></a>real,</td>
+  <td><a class="anchor" name="var-x"></a>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
   
-  <td>public</td>
   <td></td><td>::</td>
-  <td><strong>Sx</strong></td><td></td><td></td><td></td>
+  <td><strong>x</strong></td><td></td>
   
 </tr>
 
@@ -281,76 +309,37 @@ public pure function mean(x)
   
 <tr>
   
-  <td><a class="anchor" name="var-n"></a>integer,</td>
+  <td><a class="anchor" name="var-y"></a>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
   
-  <td>public</td>
   <td></td><td>::</td>
-  <td><strong>n</strong></td><td></td><td></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-i"></a>integer,</td>
-  
-  <td>public</td>
-  <td></td><td>::</td>
-  <td><strong>i</strong></td><td></td><td></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-l"></a>integer,</td>
-  
-  <td>public</td>
-  <td></td><td>::</td>
-  <td><strong>l</strong></td><td></td><td></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><a class="anchor" name="var-u"></a>integer,</td>
-  
-  <td>public</td>
-  <td></td><td>::</td>
-  <td><strong>u</strong></td><td></td><td></td><td></td>
+  <td><strong>y</strong></td><td></td>
   
 </tr>
 
 </tbody>
 </table>
 
-    </section>
-    <br>
+      
     
     
     
-
-    
-    
-    
-    
-    
+    <h4>Description</h4>
+       
 
 
-    
-    
-    </div>
+       <p>[Integer] Asserts that input argument /(x/) is greater than or equal to input argument /(y/)</p>
+        
+
   </div>
+  </div>
+
+ 	 
+  	 
+
+ </div>
+</div>
 
     <hr>
     <footer>

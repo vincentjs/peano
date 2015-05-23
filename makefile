@@ -19,14 +19,14 @@ $(OUTPUT): $(OBJECTS)
 $(OBJECTS): $(OBJDIR)%.o: $(SRCDIR)%.f90
 	$(FC) -J$(OBJDIR) $(CFLAGS) $(WFLAGS) $(DFLAGS) $< -o $@
 
+$(OBJDIR)kdtree.o: $(OBJDIR)assert.o
 $(OBJDIR)assert.o: $(OBJDIR)error.o
 
+
 clean:
-	@rm -f *.mod *.o *~
+	@rm -f ./include/*.mod ./include/*.o
 
 dist-clean: clean
-	@rm -f *.a
+	@rm -f ./lib/*.a
 
 install: $(OUTPUT) clean
-
-include .depend

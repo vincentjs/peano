@@ -61,6 +61,8 @@ All Procedures &ndash; peano
             <li><a href="../lists/procedures.html">Procedures</a></li>
 				
 								
+            <li><a href="../lists/types.html">Derived Types</a></li>
+				
 				
           </ul>
         <form action="../search.html" class="navbar-form navbar-right" role="search">
@@ -84,6 +86,24 @@ All Procedures &ndash; peano
 			 <thead><tr><th>Procedure</th><th>Location</th><th>Procedure Type</th><th>Description</th></tr></thead>
 			 <tbody>
 			 
+			   <tr><td><a href='../proc/assert_same_bounds.html'>assert_same_bounds</a></td><td><a href='../module/assert.html'>assert</a></td><td>Subroutine</td><td><p>Asserts that input vector /(/mathbf{x}/) has the same lower and upper bounds as input vector /(/mathbf{y}/)</p></td></tr>
+			 
+			   <tr><td><a href='../proc/assert_same_rank.html'>assert_same_rank</a></td><td><a href='../module/assert.html'>assert</a></td><td>Subroutine</td><td><p>Asserts that input vector /(/mathbf{x}/) has the same rank as input vector /(/mathbf{y}/)</p></td></tr>
+			 
+			   <tr><td><a href='../interface/assert_x_is_ge_y.html'>assert_x_is_ge_y</a></td><td><a href='../module/assert.html'>assert</a></td><td>Interface</td><td></td></tr>
+			 
+			   <tr><td><a href='../proc/assert_x_is_ge_y_int.html'>assert_x_is_ge_y_int</a></td><td><a href='../module/assert.html'>assert</a></td><td>Subroutine</td><td><p>[Integer] Asserts that input argument /(x/) is greater than or equal to input argument /(y/)</p></td></tr>
+			 
+			   <tr><td><a href='../proc/assert_x_is_ge_y_real.html'>assert_x_is_ge_y_real</a></td><td><a href='../module/assert.html'>assert</a></td><td>Subroutine</td><td><p>[Real] Asserts that input argument /(x/) is greater than or equal to input argument /(y/)</p></td></tr>
+			 
+			   <tr><td><a href='../proc/assert_x_is_gt_y.html'>assert_x_is_gt_y</a></td><td><a href='../module/assert.html'>assert</a></td><td>Subroutine</td><td><p>Asserts that input argument /(x/) is greater than input argument /(y/)</p></td></tr>
+			 
+			   <tr><td><a href='../proc/build.html'>build</a></td><td><a href='../module/kd_tree.html'>kd_tree</a></td><td>Function</td><td></td></tr>
+			 
+			   <tr><td><a href='../proc/build_kd_tree.html'>build_Kd_Tree</a></td><td><a href='../module/kd_tree.html'>kd_tree</a></td><td>Function</td><td><p>UX to build a balanced k-d tree from a set of sorted data points, /(S/).
+ <div class="alert alert-warning" role="alert"><h4>Warning</h4>Note that /(S/) must be input as a <em>row-major</em> array, /(\texttt{S(1:dim, 1:num)}/),
+ NOT in Fortran's usual column-major notation.</div></p></td></tr>
+			 
 			   <tr><td><a href='../proc/covariance.html'>covariance</a></td><td><a href='../module/statistics.html'>statistics</a></td><td>Function</td><td><p>Returns the covariance of two vectors \(\mathbf{x}\) and \(\mathbf{y}\),
  $$ \sigma(x,y) =\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right) \left(y_i-\mu_y\right) $$</p></td></tr>
 			 
@@ -93,6 +113,8 @@ All Procedures &ndash; peano
 			   <tr><td><a href='../proc/factorial.html'>factorial</a></td><td><a href='../module/statistics.html'>statistics</a></td><td>Function</td><td><p>Returns the factorial of the scalar value \(\mathbf{x}\),
  $$ x! = n(n-1)(n-2)\cdots(3)(2)(1) $$</p></td></tr>
 			 
+			   <tr><td><a href='../proc/insertion_sort.html'>insertion_sort</a></td><td><a href='../module/sort.html'>sort</a></td><td>Subroutine</td><td><p>An unconditionally stable, adaptive sorting algorithm with low overhead and /(O\left(n^2)/) worst-case time. This algorithm is ideal when the data set is nearly sorted or when the data set's range is small.</p></td></tr>
+			 
 			   <tr><td><a href='../proc/mean.html'>mean</a></td><td><a href='../module/statistics.html'>statistics</a></td><td>Function</td><td><p>Returns the arithmatic mean of a vector \(\mathbf{x}\).
  $$ \mu = \frac{1}{n} \sum_{i=1}^n x_i $$</p></td></tr>
 			 
@@ -101,6 +123,8 @@ All Procedures &ndash; peano
 			 
 			   <tr><td><a href='../proc/norm.html'>norm</a></td><td><a href='../module/geometry.html'>geometry</a></td><td>Function</td><td><p>Returns the \(L_2\)-norm of a vector \(\mathbf{p}\),
  $$ \lVert \mathbf{p} \rVert = \sqrt{\sum_{i=1}^n p_i} $$</p></td></tr>
+			 
+			   <tr><td><a href='../proc/selection_sort.html'>selection_sort</a></td><td><a href='../module/sort.html'>sort</a></td><td>Subroutine</td><td><p>Conditionally stable, /(\Theta\left(n^2\right)/) comparisons but only /(\Theta\left(n\right)) swaps. Generally considered to have poor performance, but may be the algorithm of choice if the cost of swapping is expensive.</p></td></tr>
 			 
 			   <tr><td><a href='../proc/standarddeviation.html'>standardDeviation</a></td><td><a href='../module/statistics.html'>statistics</a></td><td>Function</td><td><p>Returns the sample standard deviation of a vector \(\mathbf{x}\),
  $$ s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n \left(x_i - \mu_x \right)^2} $$</p></td></tr>

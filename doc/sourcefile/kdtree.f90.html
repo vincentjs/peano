@@ -59,6 +59,8 @@
             <li><a href="../lists/procedures.html">Procedures</a></li>
 				
 								
+            <li><a href="../lists/types.html">Derived Types</a></li>
+				
 				
           </ul>
         <form action="../search.html" class="navbar-form navbar-right" role="search">
@@ -116,7 +118,7 @@
     <div class="panel-heading text-left"><h3 class="panel-title">Modules</h3></div>
     <div class="list-group">
       
-      <a class="list-group-item" href="../sourcefile/kdtree.f90.html#mod-kdtree">kdtree</a>
+      <a class="list-group-item" href="../sourcefile/kdtree.f90.html#mod-kd_tree">kd_tree</a>
       
     </div>
   </div>
@@ -143,6 +145,8 @@
       
       <a class="list-group-item" href="../sourcefile/kdtree.f90.html">kdtree.f90</a>
       
+      <a class="list-group-item" href="../sourcefile/sort.f90.html">sort.f90</a>
+      
       <a class="list-group-item" href="../sourcefile/statistics.f90.html">statistics.f90</a>
       
     </div>
@@ -153,13 +157,79 @@
     <div class="col-lg-9" id='text'>
     
     
-    <div class="highlight"><pre><span class="k">module </span><span class="n">kdtree</span>
-  <span class="c">!! Provides routines for a k-dimensional tree, a space-partitioning data structure used for organizing points in k-dimensional space. Note that nearest neightbor searches within k-d trees are not suitable for high dimensional space and will likely perform no better than an exhaustive search. As a general rule of thumb, \(N \gg 2^k\).</span>
+    <div class="highlight"><pre><span class="k">module </span><span class="n">kd_tree</span>
+  <span class="c">!! Provides routines for a k-dimensional tree, a space-partitioning data structure used for organizing points in k-dimensional space. Note that nearest neightbor searches within k-d trees are not suitable for high dimensional space and will likely perform no better than an exhaustive search. As a general rule of thumb, \(N \gg 2^k\). For an introduction to k-d trees, see &quot;An introductory tutorial on kd-trees&quot; (Andrew Moore, 1991).</span>
 
+  <span class="k">type </span><span class="n">kdbox</span>
+     <span class="c">!! Represents a hyperrectangle / box / n-orthotope)</span>
+     <span class="kt">real</span> <span class="kd">::</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span>
+<span class="nb">  </span><span class="k">end type </span><span class="n">kdbox</span>
+
+  <span class="k">type </span><span class="n">kdnode</span>
+     <span class="c">!! Represents a node in the kdtree</span>
+     <span class="k">private</span>
+<span class="k">     </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">split</span>
+     <span class="c">!! The split dimension of this node</span>
+     <span class="k">type</span><span class="p">(</span><span class="n">kdnode</span><span class="p">),</span> <span class="k">pointer</span> <span class="kd">::</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span>
+     <span class="c">!! The left and right child nodes</span>
+     <span class="k">type</span><span class="p">(</span><span class="n">kdbox</span><span class="p">),</span> <span class="k">pointer</span> <span class="kd">::</span> <span class="n">orthotope</span> <span class="o">=&gt;</span> <span class="nb">null</span><span class="p">()</span>
+     <span class="c">!! The bounding hyperrectangle of this node</span>
+  <span class="k">end type </span><span class="n">kdnode</span>
+
+  <span class="k">type </span><span class="n">kdtree</span>
+     <span class="c">!! Represents the kdtree itself</span>
+     <span class="kt">real</span><span class="p">,</span> <span class="k">pointer</span> <span class="kd">::</span> <span class="n">set</span><span class="p">(:,:)</span> <span class="o">=&gt;</span> <span class="nb">null</span><span class="p">()</span>
+     <span class="c">!! The input (sorted, row-major) data set associated with this kd tree</span>
+     <span class="k">type</span><span class="p">(</span><span class="n">kdnode</span><span class="p">),</span> <span class="k">pointer</span> <span class="kd">::</span> <span class="n">root</span> <span class="o">=&gt;</span> <span class="nb">null</span><span class="p">()</span>
+     <span class="c">!! The root node of the kd tree</span>
+     <span class="kt">integer</span> <span class="kd">::</span> <span class="nb">dim</span> <span class="o">=</span> <span class="mi">0</span>
+     <span class="c">!! The rank of the data set&#39;s domain</span>
+     <span class="kt">integer</span> <span class="kd">::</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+     <span class="c">!! The rank of the data set&#39;s range</span>
+  <span class="k">end type </span><span class="n">kdtree</span>
+  
 <span class="k">contains</span>
-<span class="k">  </span>
-<span class="k">  </span>
-<span class="k">end module </span><span class="n">kdtree</span>
+
+<span class="k">  function </span><span class="n">build_Kd_Tree</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">kdt</span><span class="p">)</span>
+    <span class="c">!! UX to build a balanced k-d tree from a set of sorted data points, /(S/).</span>
+    <span class="c">!! @warning Note that /(S/) must be input as a *row-major* array, /(\texttt{S(1:dim, 1:num)}/),</span>
+    <span class="c">!! NOT in Fortran&#39;s usual column-major notation. </span>
+    
+    <span class="k">use </span><span class="n">statistics</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">median</span>
+    <span class="k">use </span><span class="n">assert</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">assert_x_is_ge_y</span>
+
+    <span class="kt">real</span><span class="p">,</span> <span class="k">target</span> <span class="kd">::</span> <span class="n">S</span><span class="p">(:,:)</span>
+    <span class="k">type</span><span class="p">(</span><span class="n">kdtree</span><span class="p">),</span> <span class="k">pointer</span> <span class="kd">::</span> <span class="n">kdt</span>
+
+    <span class="c">! Store data set and properties in kdtree structure</span>
+    <span class="k">allocate</span><span class="p">(</span><span class="n">kdt</span><span class="p">)</span>
+    <span class="n">kdt</span><span class="p">%</span><span class="n">set</span> <span class="o">=&gt;</span> <span class="n">S</span>
+    <span class="n">kdt</span><span class="p">%</span><span class="nb">dim</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">kdt</span><span class="p">%</span><span class="n">num</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c">! The number of data points must be greater than the number of its dimensions.</span>
+    <span class="k">call </span><span class="n">assert_x_is_ge_y</span><span class="p">(</span><span class="n">kdt</span><span class="p">%</span><span class="n">num</span><span class="p">,</span> <span class="n">kdt</span><span class="p">%</span><span class="nb">dim</span><span class="p">)</span>
+
+    <span class="c">! The data set is bounded by a _dim_-orthotope. Find these bounds.</span>
+    
+    <span class="c">! Recursively build the kd tree</span>
+    <span class="n">kdt</span><span class="p">%</span><span class="n">root</span> <span class="o">=&gt;</span> <span class="n">build</span><span class="p">(</span><span class="n">kdt</span><span class="p">)</span>
+    
+    <span class="c">! The root of the kd tree is determined by the initial split dimension, which we set</span>
+    <span class="c">! as the median of the (sorted) data set.</span>
+    
+    <span class="c">! Recursively build the tree</span>
+        
+  <span class="k">end function </span><span class="n">build_Kd_Tree</span>
+
+  <span class="k">recursive function </span><span class="n">build</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span> <span class="k">result</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+    <span class="k">type</span><span class="p">(</span><span class="n">kdtree</span><span class="p">),</span> <span class="k">pointer</span> <span class="kd">::</span> <span class="n">tree</span>
+    <span class="k">type</span><span class="p">(</span><span class="n">kdnode</span><span class="p">),</span> <span class="k">pointer</span> <span class="kd">::</span> <span class="n">node</span>
+    
+  <span class="k">end function </span><span class="n">build</span>
+  
+<span class="k">end module </span><span class="n">kd_tree</span>
 </pre></div>
 
     </div>
