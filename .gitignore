@@ -1,0 +1,26 @@
+# Compiled source
+*.exe
+*.o
+*.mod
+*.so
+*.dll
+*.exe
+
+# Packages
+*.gz
+*.7z
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.dmg
+
+# Logs
+*.log
+
+# OS Generated Files
+._*
+.Trashes
+.DS_Store
+.Thumbs.db
