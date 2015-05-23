@@ -3,7 +3,7 @@ AR := ar cr
 CFLAGS := -c -O2 -cpp
 WFLAGS := -Wall -Wextra -Wconversion -pedantic
 DFLAGS := -g -fbacktrace -fbounds-check -ffpe-trap=zero,overflow,underflow
-LDFLAGS := 
+LDLIBS := 
 SRCDIR := ./src/
 OBJDIR := ./include/
 BINDIR := ./bin/
