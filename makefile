@@ -21,6 +21,7 @@ $(OBJECTS): $(OBJDIR)%.o: $(SRCDIR)%.f90
 
 $(OBJDIR)kdtree.o: $(OBJDIR)assert.o
 $(OBJDIR)assert.o: $(OBJDIR)error.o
+$(OBJDIR)constants.o: $(OBJDIR)precision.o
 
 
 clean:
