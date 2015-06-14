@@ -1,20 +1,26 @@
 module kd_tree
   !! Provides routines for a k-dimensional tree, a space-partitioning data structure used for organizing points in k-dimensional space. Note that nearest neightbor searches within k-d trees are not suitable for high dimensional space and will likely perform no better than an exhaustive search. As a general rule of thumb, \(N \gg 2^k\). For an introduction to k-d trees, see "An introductory tutorial on kd-trees" (Andrew Moore, 1991).
 
+  implicit none
+  
   type kdbox
-     !! Represents a hyperrectangle / box / n-orthotope)
+     !! Represents a hypercube
      real :: min, max
   end type kdbox
 
   type kdnode
      !! Represents a node in the kdtree
      private
-     integer :: split
-     !! The split dimension of this node
+     integer :: splitDim
+     !! The split dimension for this node
+     real :: splitVal
+     !! The value of the split dimension for this node
+     integer :: l, u
+     !! The lower and upper indices of the array slice of the original data set used for this node
      type(kdnode), pointer :: left, right
      !! The left and right child nodes
      type(kdbox), pointer :: orthotope => null()
-     !! The bounding hyperrectangle of this node
+     !! The bounding hypercube of this node
   end type kdnode
 
   type kdtree
@@ -28,19 +34,21 @@ module kd_tree
      integer :: num = 0
      !! The rank of the data set's range
   end type kdtree
+
+  public :: build_kd_tree, destroy_kd_tree
   
 contains
 
-  function build_Kd_Tree(S) result(kdt)
+  function build_kd_tree(S) result(kdt)
     !! UX to build a balanced k-d tree from a set of sorted data points, /(S/).
     !! @warning Note that /(S/) must be input as a *row-major* array, /(\texttt{S(1:dim, 1:num)}/),
-    !! NOT in Fortran's usual column-major notation. 
+    !! in conjunction with Fortran's usual notation. 
     
-    use statistics, only: median
     use assert, only: assert_x_is_ge_y
 
     real, target :: S(:,:)
     type(kdtree), pointer :: kdt
+    integer :: rootDepth, l, u
 
     ! Store data set and properties in kdtree structure
     allocate(kdt)
@@ -51,23 +59,71 @@ contains
     ! The number of data points must be greater than the number of its dimensions.
     call assert_x_is_ge_y(kdt%num, kdt%dim)
 
-    ! The data set is bounded by a _dim_-orthotope. Find these bounds.
-    
     ! Recursively build the kd tree
-    kdt%root => build(kdt)
+    l = lbound(S,2)
+    u = ubound(S,2)
+    rootDepth = 0
+    kdt%root => build(kdt, l, u, rootDepth)
     
-    ! The root of the kd tree is determined by the initial split dimension, which we set
-    ! as the median of the (sorted) data set.
+  end function build_kd_tree
+
+  recursive function build(tree, l, u, depth) result (node)
+
+    use statistics, only: median
     
-    ! Recursively build the tree
-        
-  end function build_Kd_Tree
-
-  recursive function build(tree) result (node)
-
+    integer, intent(in) :: depth, l, u
     type(kdtree), pointer :: tree
     type(kdnode), pointer :: node
+
+    integer :: k, axis, m
+
+    ! Allocate the node resulting from this build
+    allocate(node)
+
+    ! Create a balanced kdtree
+    ! Select axis based on modular depth, allowing axis to cycle through all valid values
+    k = size(tree%set)
+    axis = mod(depth, k)
+
+    ! Set the split dimension as the median
+    m = ceiling(median(tree%set(axis,l:u)))
+    node%splitDim = m
+    node%splitVal = tree%set(axis, m)
+    
+    ! Recursively build tree
+    node%left => build(tree, l, m-1, depth + 1)
+    node%right => build(tree, m, u, depth + 1)
     
   end function build
+
+  subroutine destroy_kd_tree(kdt)
+
+    type(kdtree), pointer :: kdt
+
+    call destroy_node(kdt%root)
+
+    deallocate(kdt)
+
+  contains
+
+    recursive subroutine destroy_node(node)
+      !! Recursively destroy each node in the kdtree
+      
+      type(kdnode), pointer :: node
+
+      if (associated(node%left)) then
+         call destroy_node(node%left)
+         nullify(node%left)
+      end if
+
+      if (associated(node%right)) then
+         call destroy_node(node%right)
+         nullify(node%right)
+      end if
+
+      deallocate(node)
+    end subroutine destroy_node
+    
+  end subroutine destroy_kd_tree
   
 end module kd_tree
