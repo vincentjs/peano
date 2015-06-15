@@ -3,6 +3,8 @@ module error
 
   implicit none
 
+  public :: add_error_message, print_error_list_to_shell, terminate_with_failure
+  
   private
 
   character(len=1024) :: error_list(1:100)

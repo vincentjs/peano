@@ -13,7 +13,7 @@ OUTPUT := peano_tester
 all: $(OUTPUT)
 
 $(OUTPUT): $(OBJECTS)
-	$(FC) -o $@ $^ ../include/statistics.o $(LDLIBS)
+	$(FC) -o $@ $^ $(LDLIBS)
 
 $(OBJECTS): %.o: %.f90
 	$(FC) $(LDFLAGS) $(CFLAGS) $(WFLAGS) $(DFLAGS) $< 
