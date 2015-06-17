@@ -18,7 +18,7 @@ contains
        ! No match found
        return
     else
-       imid = ceiling(median(A))
+       imid = median(A)
 
        if (A(imid) > key) then
           ! Search left

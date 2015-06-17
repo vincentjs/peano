@@ -50,20 +50,22 @@ contains
     type(kdtree), pointer :: kdt
     integer :: rootDepth, l, u
 
-    ! Store data set and properties in kdtree structure
-    allocate(kdt)
-    kdt%set => S
-    kdt%dim = size(S,1)
-    kdt%num = size(S,2)
+    if (size(S,2) .gt. 0) then
+       ! Store data set and properties in kdtree structure
+       allocate(kdt)
+       kdt%set => S
+       kdt%dim = size(S,1)
+       kdt%num = size(S,2)
 
-    ! The number of data points must be greater than the number of its dimensions.
-    call assert_x_is_ge_y(kdt%num, kdt%dim)
+       ! The number of data points must be greater than the number of its dimensions.
+       call assert_x_is_ge_y(kdt%num, kdt%dim)
 
-    ! Recursively build the kd tree
-    l = lbound(S,2)
-    u = ubound(S,2)
-    rootDepth = 0
-    kdt%root => build(kdt, l, u, rootDepth)
+       ! Recursively build the kd tree
+       l = lbound(S,2)
+       u = ubound(S,2)
+       rootDepth = 1
+       kdt%root => build(kdt, l, u, rootDepth)
+    end if
     
   end function build_kd_tree
 
@@ -77,22 +79,24 @@ contains
 
     integer :: k, axis, m
 
-    ! Allocate the node resulting from this build
-    allocate(node)
+    if (u >= l) then
+       ! Allocate the node resulting from this build
+       allocate(node)
 
-    ! Create a balanced kdtree
-    ! Select axis based on modular depth, allowing axis to cycle through all valid values
-    k = size(tree%set)
-    axis = mod(depth, k)
+       ! Create a balanced kdtree
+       ! Select axis based on modular depth, allowing axis to cycle through all valid values
+       k = size(tree%set,2)
+       axis = mod(depth, k)
 
-    ! Set the split dimension as the median
-    m = ceiling(median(tree%set(axis,l:u)))
-    node%splitDim = m
-    node%splitVal = tree%set(axis, m)
-    
-    ! Recursively build tree
-    node%left => build(tree, l, m-1, depth + 1)
-    node%right => build(tree, m, u, depth + 1)
+       ! Set the split dimension as the median
+       m = median(tree%set(axis,l:u))
+       node%splitDim = m
+       node%splitVal = tree%set(axis, m)
+
+       ! Recursively build tree
+       node%left => build(tree, l, m-1, depth + 1)
+       node%right => build(tree, m, u, depth + 1)
+    end if
     
   end function build
 

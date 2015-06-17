@@ -56,42 +56,19 @@ contains
 
   end function mean
   
-  pure real function median_int(x) result(xm)
+  pure integer function median_int(x) result(xm)
 
     integer, intent(in) :: x(:)
 
-    integer :: n, nd2
-    real :: xmm1, xmp1
-
-     n = size(x)
-    nd2 = ceiling(n/2.0)
-
-    if (mod(n,2) .eq. 0) then
-       xm = x(nd2)
-    else
-       xmm1 = x(nd2-1)
-       xmp1 = x(nd2)
-       xm = (xmm1 + xmp1) / 2.0
-    end if
+    xm = ceiling(size(x)/2.0)
+       
   end function median_int
   
-  pure real function median_real(x) result (xm)
+  pure integer function median_real(x) result (xm)
 
     real, intent(in) :: x(:)
     
-    integer :: n, nd2
-    real :: xmm1, xmp1
-    
-    n = size(x)
-    nd2 = ceiling(n/2.0)
-
-    if (mod(n,2) .eq. 0) then
-       xm = x(nd2)
-    else
-       xmm1 = x(nd2-1)
-       xmp1 = x(nd2)
-       xm = (xmm1 + xmp1) / 2.0
-    end if
+    xm = ceiling(size(x)/2.0)
   
   end function median_real
 
